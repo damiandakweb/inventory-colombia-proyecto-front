@@ -3,7 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import {
     TextField, InputAdornment, Box, Button, Typography, IconButton, Chip, Tooltip, Link,
     Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TablePagination,
-    Checkbox, CircularProgress, Select, MenuItem, FormControl
+    Checkbox, CircularProgress, Select, MenuItem, FormControl, InputLabel,
+    Dialog, DialogTitle, DialogContent, DialogActions
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
@@ -68,6 +69,11 @@ const ActivosPage = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(20);
     const [selected, setSelected] = useState([]);
+
+    const [isBajaDialogOpen, setIsBajaDialogOpen] = useState(false);
+    const [activoParaBaja, setActivoParaBaja] = useState(null);
+    const [motivoBaja, setMotivoBaja] = useState('');
+    const [motivoError, setMotivoError] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -318,15 +324,29 @@ const ActivosPage = () => {
         }
     };
 
-    const handleDelete = async (id) => {
-        if (window.confirm(t('asset_page.confirmations.delete_asset'))) {
-            try {
-                await deleteActivo(id);
-                await fetchActivos();
-                showNotification(t('asset_page.notifications.asset_deleted_success'), 'warning');
-            } catch (error) {
-                showNotification(t('asset_page.notifications.asset_deleted_error'), 'error');
-            }
+    const handleOpenBajaDialog = (activo) => {
+        setActivoParaBaja(activo);
+        setMotivoBaja('');
+        setMotivoError(false);
+        setIsBajaDialogOpen(true);
+    };
+
+    const handleConfirmBaja = async () => {
+        if (!motivoBaja.trim()) {
+            setMotivoError(true);
+            return;
+        }
+        try {
+            await deleteActivo(activoParaBaja.idEquipo, motivoBaja);
+            showNotification(t('asset_page.notifications.asset_deleted_success'), 'success');
+            fetchActivos();
+        } catch (error) {
+            const msg = error.response?.data?.message || t('asset_page.notifications.asset_deleted_error');
+            showNotification(msg, 'error');
+        } finally {
+            setIsBajaDialogOpen(false);
+            setActivoParaBaja(null);
+            setMotivoBaja('');
         }
     };
 
@@ -576,7 +596,7 @@ const ActivosPage = () => {
                                                         </IconButton>
                                                     </Tooltip>
                                                     <Tooltip title={t('asset_page.tooltips.deactivate_asset')}>
-                                                        <IconButton color="error" onClick={() => handleDelete(row.idEquipo)} size="small">
+                                                        <IconButton color="error" onClick={() => handleOpenBajaDialog(row)} size="small">
                                                             <DeleteIcon />
                                                         </IconButton>
                                                     </Tooltip>
@@ -604,6 +624,7 @@ const ActivosPage = () => {
             )}
 
             <ActivoModal open={isActivoModalOpen} onClose={handleCloseModal} onSave={handleSaveActivo} activo={currentActivo} />
+
             {currentActivo && (<MovimientoModal open={isMovimientoModalOpen} onClose={handleCloseMovimientoModal} onSave={handleSaveMovimiento} activo={currentActivo} />)}
             <ReporteModal open={isReporteModalOpen} onClose={() => setIsReporteModalOpen(false)} />
 
@@ -615,6 +636,49 @@ const ActivosPage = () => {
                 assets={relatedAssetsList}
                 parentAssetName={currentActivoForRelated?.etiquetaInventario}
             />
+
+    <Dialog open={isBajaDialogOpen} onClose={() => setIsBajaDialogOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>Dar de baja activo</DialogTitle>
+        <DialogContent dividers>
+            <Box sx={{ mb: 2 }}>
+                <Typography variant="body2" color="text.secondary">
+                    Estás dando de baja: <strong>{activoParaBaja?.etiquetaInventario}</strong>
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+                    Esta acción marca el activo como <strong>Retirado</strong>. El historial se conserva.
+                </Typography>
+            </Box>
+            <FormControl fullWidth required sx={{ mt: 1 }}>
+                <InputLabel>{t('asset_page.baja_dialog.reason_label')}</InputLabel>
+                <Select
+                    value={motivoBaja}
+                    label={t('asset_page.baja_dialog.reason_label')}
+                    onChange={(e) => { setMotivoBaja(e.target.value); setMotivoError(false); }}
+                    error={motivoError}
+                >
+                    <MenuItem value="Dañado irreparable">Dañado irreparable</MenuItem>
+                    <MenuItem value="Robo">Robo</MenuItem>
+                    <MenuItem value="Venta">Venta</MenuItem>
+                    <MenuItem value="Obsoleto">Obsoleto</MenuItem>
+                    <MenuItem value="Donación">Donación</MenuItem>
+                    <MenuItem value="Otro">Otro</MenuItem>
+                </Select>
+                {motivoError && (
+                    <Typography variant="caption" color="error" sx={{ mt: 0.5, ml: 1 }}>
+                        {t('asset_page.baja_dialog.reason_required')}
+                    </Typography>
+                )}
+            </FormControl>
+        </DialogContent>
+        <DialogActions sx={{ p: '16px 24px' }}>
+            <Button onClick={() => setIsBajaDialogOpen(false)}>
+                {t('common.cancel')}
+            </Button>
+            <Button onClick={handleConfirmBaja} variant="contained" color="error">
+                {t('asset_page.baja_dialog.confirm_button')}
+            </Button>
+        </DialogActions>
+    </Dialog>
         </Box>
     );
 };

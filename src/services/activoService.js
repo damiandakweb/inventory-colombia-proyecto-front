@@ -37,8 +37,8 @@ export const updateActivo = (id, activoData) => {
  * Elimina un activo.
  * @param {number|string} id - El ID del activo a eliminar.
  */
-export const deleteActivo = (id) => {
-    return apiClient.delete(`/activos/${id}`);
+export const deleteActivo = (id, motivo) => {
+    return apiClient.delete(`/activos/${id}?motivo=${encodeURIComponent(motivo)}`);
 };
 
 /**

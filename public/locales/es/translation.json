@@ -178,6 +178,12 @@
       "common_link": "Vincular",
       "country_label": "Pais",
       "select_country": "Selecionar País"
+    },
+
+    "baja_dialog": {
+      "reason_label": "Motivo de baja",
+      "reason_required": "El motivo es obligatorio",
+      "confirm_button": "Confirmar baja"
     }
   },
   "requests_page": {
@@ -333,9 +339,9 @@
   },
   "movement_types": {
     "ASIGNACION": "Asignación",
+    "DEVOLUCION DE EQUIPO": "Devolución de equipo",
     "TRASLADO": "Traslado",
     "MANTENIMIENTO": "Mantenimiento",
-    "DEVOLUCION": "Devolución",
     "BAJA": "Baja"
   },
   "return_modal": {

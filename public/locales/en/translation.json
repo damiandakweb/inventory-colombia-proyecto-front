@@ -178,6 +178,11 @@
       "common_link": "Link",
       "country_label": "Country",
       "select_country": "Select country"
+    },
+    "baja_dialog": {
+      "reason_label": "Reason for decommission",
+      "reason_required": "Reason is required",
+      "confirm_button": "Confirm decommission"
     }
   },
   "requests_page": {
@@ -333,9 +338,9 @@
   },
   "movement_types": {
     "ASIGNACION": "Assignment",
-    "TRASLADO": "Relocation",
+    "DEVOLUCION DE EQUIPO": "Equipment return",
+    "TRASLADO": "Transfer",
     "MANTENIMIENTO": "Maintenance",
-    "DEVOLUCION": "Return",
     "BAJA": "Decommission"
   },
   "return_modal": {

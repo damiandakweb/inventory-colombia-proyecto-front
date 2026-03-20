@@ -12,7 +12,7 @@ import { getAllUbicaciones } from '../services/ubicacionService';
  */
 const MovimientoModal = ({ open, onClose, onSave, activo, solicitud, tipoMovimientoInicial = '' }) => {
     const { t } = useTranslation();
-    const tiposDeMovimiento = ["ASIGNACION", "TRASLADO", "MANTENIMIENTO", "DEVOLUCION", "BAJA"];
+    const tiposDeMovimiento = ["ASIGNACION", "DEVOLUCION DE EQUIPO", "TRASLADO", "MANTENIMIENTO"];
     const initialState = {
         tipoDeMovimiento: '',
         idUsuario: '',
