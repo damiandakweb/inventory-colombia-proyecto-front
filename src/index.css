@@ -1,0 +1,16 @@
+/* src/index.css */
+
+/* 1. Reseteo Básico */
+/* Le decimos al navegador, al HTML y al div raíz de React que no tengan márgenes ni padding */
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* 2. Reseteo para todos los demás elementos */
+*, *:before, *:after {
+    box-sizing: inherit;
+}

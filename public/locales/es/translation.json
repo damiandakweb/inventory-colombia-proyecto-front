@@ -1,0 +1,435 @@
+{
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "decommission": "Dar de Baja",
+    "actions": "Acciones",
+    "yes": "Sí",
+    "no": "No",
+    "search": "Buscar...",
+    "loading": "Cargando...",
+    "no_options": "Sin opciones",
+    "related": "Relacionados",
+    "status": "Estado",
+    "category": "Categoría",
+    "user": "Usuario",
+    "brand": "Marca",
+    "model": "Modelo",
+    "serial_number": "Número de Serie",
+    "rows_per_page": "Filas por página",
+    "pagination_info": "{{from}}-{{to}} de {{count}}",
+    "rows_selected": "{{count}} fila(s) seleccionada(s)",
+    "total_rows": "Filas totales:"
+  },
+  "languages": {
+    "es": "Español",
+    "en": "Inglés",
+    "change_language": "Cambiar Idioma"
+  },
+  "sidebar": {
+    "header": "Inventario Colombia",
+    "dashboard": "Dashboard",
+    "assets": "Activos",
+    "requests": "Solicitudes",
+    "users": "Usuarios",
+    "locations": "Ubicaciones",
+    "categories": "Categorías",
+    "guest": "Invitado",
+    "no_role": "Sin rol",
+    "pending_requests_tooltip": "Ver Solicitudes Pendientes",
+    "logout": "Cerrar Sesión"
+  },
+  "roles": {
+    "ADMINISTRADOR": "ADMINISTRADOR",
+    "ALMACENISTA": "ALMACENISTA",
+    "USUARIO": "USUARIO"
+  },
+  "login_page": {
+    "title": "Iniciar Sesión",
+    "username_label": "Correo Electrónico",
+    "password_label": "Contraseña",
+    "login_button": "Ingresar",
+    "unicity_inventory": "Inventario Unicity"
+  },
+  "dashboard_page": {
+    "header": {
+      "title": "Dashboard",
+      "subtitle": "Resumen general del sistema de inventario"
+    },
+    "refresh_button": "Actualizar",
+    "stats": {
+      "total_assets": "Activos Totales",
+      "total_users": "Usuarios",
+      "pending_requests": "Solicitudes Pendientes",
+      "backup_computers": "Computadores Backup"
+    },
+    "charts": {
+      "assets_by_status": "Distribución de Activos por Estado"
+    },
+    "activity": {
+      "title": "Actividad Reciente",
+      "by_user": "Por: {{user}}"
+    },
+    "data_keys": {
+      "en_uso": "En uso",
+      "en_bodega": "En bodega",
+      "dañado": "Dañado",
+      "en_mantenimiento": "En mantenimiento",
+      "devolución_a_bodega": "Devolución a Bodega",
+      "devolución_por_dañofallo": "Devolución por Daño/Fallo",
+      "cambio_por_daño": "Cambio por Daño",
+      "asignación_directa": "Asignación Directa",
+      "unknown": "Desconocido"
+    }
+  },
+  "asset_page": {
+    "title": "Gestión de Activos",
+    "add_button": "Añadir Activo",
+    "generate_report_button": "Generar Reporte",
+    "print_labels_button": "Imprimir {{count}} Etiquetas",
+    "print_labels_title": "Imprimir Etiquetas",
+    "search_placeholder": "Buscar por etiqueta, marca, línea, serie...",
+    "active_filter": "Filtro activo: {{filter}}",
+
+    "all_countries": "Todos los países",
+    "all_brands": "Todas las marcas",
+    "all_categories": "Todas las categorías",
+    "all_states": "Todos los estados",
+    "all_users": "Todos los usuarios",
+    "clear_filters": "Limpiar filtros",
+
+    "table_headers": {
+      "label": "Etiqueta",
+      "warranty": "Garantía",
+      "serial_number": "Número de Serie"
+    },
+    "table_data": {
+      "no_label": "Sin etiqueta",
+      "unassigned": "Sin Asignar",
+      "linked_assets": "Activos Enlazados"
+    },
+    "warranty": {
+      "no_warranty": "Sin garantía",
+      "expired": "Vencida",
+      "valid": "Vigente",
+      "days_remaining": "{{days}} días restantes",
+      "expired_days_ago": "Vencida hace {{days}} días",
+      "days_remaining_tooltip": "{{days}} días restantes"
+    },
+    "warranty_legend": {
+      "title": "Leyenda de garantías:",
+      "valid": "Garantía vigente",
+      "expiring": "Próxima a vencer (≤30 días)",
+      "expired": "Garantía vencida",
+      "no_warranty": "Sin garantía"
+    },
+    "tooltips": {
+      "edit_asset": "Editar Activo",
+      "register_movement": "Registrar Movimiento",
+      "deactivate_asset": "Dar de Baja",
+      "show_related": "Ver activos relacionados"
+    },
+    "notifications": {
+      "load_error": "Error al cargar la lista de activos",
+      "load_related_error": "Error loading",
+      "asset_created_success": "Activo creado exitosamente",
+      "asset_updated_success": "Activo actualizado exitosamente",
+      "asset_created_error": "Error al crear el activo",
+      "asset_updated_error": "Error al actualizar el activo",
+      "movement_success": "Movimiento registrado exitosamente",
+      "movement_error": "Error al registrar el movimiento",
+      "asset_deleted_success": "Activo dado de baja correctamente",
+      "asset_deleted_error": "Error al dar de baja el activo"
+    },
+    "confirmations": {
+      "delete_asset": "¿Estás seguro de que quieres dar de baja este activo?"
+    },
+    "modal": {
+      "create_title": "Crear Nuevo Activo",
+      "edit_title": "Editar Activo",
+      "assigned_user": "Usuario Asignado (buscar por nombre)",
+      "no_users_found": "No se encontraron usuarios",
+      "inventory_label": "Etiqueta de Inventario",
+      "required_field": "Campo obligatorio",
+      "serial_number": "Número de Serie",
+      "brand_placeholder": "Marca (ej. Dell, HP)",
+      "model_placeholder": "Línea / Modelo (ej. Latitude)",
+      "date_section_title": "Información de Fechas",
+      "purchase_date": "Fecha de Compra",
+      "purchase_date_required": "La fecha de compra es obligatoria.",
+      "purchased_on": "Comprado el",
+      "warranty_date": "Fecha de Garantía",
+      "warranty_until": "Garantía hasta",
+      "related_assets_title": "Activos Relacionados",
+      "no_linked_assets": "No hay activos enlazados.",
+      "search_to_link": "Buscar activo para enlazar...",
+      "no_assets_to_link": "No hay activos disponibles para enlazar",
+      "link_asset_tooltip": "Enlazar activo",
+      "already_linked": "Este activo ya está enlazado",
+      "link_success": "Activo enlazado correctamente",
+      "link_error": "Error al enlazar el activo",
+      "unlink_success": "Activo desenlazado correctamente",
+      "unlink_error": "Error al desenlazar el activo",
+      "basic_info_title": "Información Básica del Activo",
+      "linked_assets_subtitle": "Activos Relacionados",
+      "add_linked_asset_subtitle": "Vincular Nuevo Activo",
+      "common_link": "Vincular",
+      "country_label": "Pais",
+      "select_country": "Selecionar País"
+    }
+  },
+  "requests_page": {
+    "title": "Gestión de Solicitudes",
+    "search_placeholder": "Buscar en solicitudes...",
+    "active_filter": "Filtro activo: Solicitudes Pendientes",
+    "table_headers": {
+      "ticket": "Ticket",
+      "date": "Fecha",
+      "type": "Tipo",
+      "user": "Usuario",
+      "category": "Categoría",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "tooltips": {
+      "process": "Procesar Solicitud",
+      "maintenance": "Enviar a Mantenimiento",
+      "return": "Procesar Devolución"
+    },
+    "notifications": {
+      "load_error": "Error al cargar las solicitudes",
+      "processed_success": "Solicitud procesada con éxito",
+      "maintenance_success": "Activo enviado a mantenimiento",
+      "return_success": "Devolución procesada con éxito",
+      "action_error": "Error al procesar la acción"
+    },
+    "statuses": {
+      "Nuevo": "Nuevo",
+      "Procesado": "Procesado"
+    }
+  },
+  "users_page": {
+    "title": "Gestión de Usuarios",
+    "add_button": "Añadir Usuario",
+    "search_placeholder": "Buscar por nombre, correo o rol...",
+    "table_headers": {
+      "id": "ID",
+      "full_name": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "role": "Rol",
+      "actions": "Acciones"
+    },
+    "tooltips": {
+      "edit_user": "Editar Usuario",
+      "delete_user": "Eliminar Usuario"
+    },
+    "notifications": {
+      "load_error": "Error al cargar la lista de usuarios",
+      "created_success": "Usuario creado con éxito",
+      "updated_success": "Usuario actualizado con éxito",
+      "save_error": "Error al crear o actualizar el usuario",
+      "deleted_success": "Usuario eliminado correctamente",
+      "delete_error": "Error al eliminar el usuario"
+    },
+    "confirmations": {
+      "delete": "¿Estás seguro de que quieres eliminar este usuario?"
+    }
+  },
+  "user_detail_page": {
+    "breadcrumb_users": "Usuarios",
+    "assigned_assets_title": "Activos Asignados",
+    "details_section": {
+      "id": "ID",
+      "role": "Rol",
+      "email": "Email"
+    },
+    "assets_table_headers": {
+      "asset_id": "ID Activo",
+      "label": "Etiqueta",
+      "category": "Categoría",
+      "status": "Estado"
+    },
+    "not_found": "Usuario no encontrado o error al cargar."
+  },
+  "user_modal": {
+    "edit_title": "Editar Usuario",
+    "create_title": "Crear Nuevo Usuario",
+    "full_name_label": "Nombre Completo",
+    "email_label": "Correo Electrónico",
+    "password_label": "Contraseña",
+    "role_label": "Rol",
+    "validations": {
+      "name_required": "El nombre es obligatorio.",
+      "email_required": "El correo es obligatorio.",
+      "email_invalid": "El formato del correo no es válido.",
+      "password_required": "La contraseña es obligatoria."
+    }
+  },
+  "categories_page": {
+    "title": "Gestión de Categorías",
+    "add_button": "Crear Categoría",
+    "table_headers": {
+      "id": "ID",
+      "category_name": "Nombre de Categoría",
+      "actions": "Acciones"
+    },
+    "notifications": {
+      "load_error": "Error al cargar las categorías",
+      "created_success": "Categoría creada exitosamente",
+      "updated_success": "Categoría actualizada exitosamente",
+      "save_error": "Error al guardar la categoría",
+      "deleted_success": "Categoría eliminada",
+      "delete_error": "Error al eliminar, es posible que esté en uso"
+    },
+    "confirmations": {
+      "delete": "¿Seguro que quieres eliminar esta categoría?"
+    },
+    "modal": {
+      "edit_title": "Editar Categoría",
+      "create_title": "Crear Nueva Categoría",
+      "name_label": "Nombre de la Categoría",
+      "required_field": "Este campo es obligatorio"
+    }
+  },
+  "locations_page": {
+    "title": "Gestión de Ubicaciones",
+    "add_button": "Crear Ubicación",
+    "table_headers": {
+      "id": "ID",
+      "location_name": "Nombre de Ubicación"
+    },
+    "notifications": {
+      "load_error": "Error al cargar las ubicaciones",
+      "created_success": "Ubicación creada exitosamente",
+      "updated_success": "Ubicación actualizada exitosamente",
+      "save_error": "Error al guardar la ubicación",
+      "deleted_success": "Ubicación eliminada",
+      "delete_error": "Error al eliminar, es posible que esté en uso"
+    },
+    "confirmations": {
+      "delete": "¿Seguro que quieres eliminar esta ubicación?"
+    },
+    "modal": {
+      "edit_title": "Editar Ubicación",
+      "create_title": "Crear Nueva Ubicación",
+      "name_label": "Nombre de la Ubicación",
+      "required_field": "Este campo es obligatorio"
+    }
+  },
+  "movement_modal": {
+    "title": "Registrar Movimiento",
+    "asset_to_modify": "Activo a Modificar",
+    "label_chip": "Etiqueta: {{label}}",
+    "movement_type_label": "Tipo de Movimiento",
+    "assign_to_user_label": "Asignar a Usuario",
+    "new_location_label": "Nueva Ubicación",
+    "observation_label": "Observación",
+    "register_button": "Registrar Movimiento"
+  },
+  "movement_types": {
+    "ASIGNACION": "Asignación",
+    "TRASLADO": "Traslado",
+    "MANTENIMIENTO": "Mantenimiento",
+    "DEVOLUCION": "Devolución",
+    "BAJA": "Baja"
+  },
+  "return_modal": {
+    "title": "Procesar Devolución de Equipo",
+    "asset_to_return_label": "Activo a devolver",
+    "no_assets_error": "El usuario no tiene activos de esta categoría.",
+    "observation_label": "Observación (Opcional)",
+    "confirm_button": "Confirmar Devolución"
+  },
+  "maintenance_modal": {
+    "title": "Enviar a Mantenimiento",
+    "asset_to_send_label": "Activo a enviar",
+    "confirm_button": "Confirmar"
+  },
+  "print_qr_page": {
+    "no_assets_selected": "No hay activos seleccionados para imprimir."
+  },
+  "process_request_modal": {
+    "title": "Procesar Solicitud #{{id}}",
+    "return_asset_label": "Seleccionar Activo a Devolver",
+    "user_has_no_asset_message": "El usuario no tiene un activo de esta categoría para devolver.",
+    "assign_asset_label": "Seleccionar Activo a Asignar",
+    "replace_asset_label": "Seleccionar Activo de Reemplazo",
+    "no_available_assets_error": "No hay activos disponibles de esta categoría.",
+    "destination_location_label": "Ubicación de Destino",
+    "observation_label": "Observación",
+    "complete_button": "Completar Proceso"
+  },
+  "report_modal": {
+    "title": "Generador de Reportes de Activos",
+    "step1_title": "1. Aplicar Filtros (Opcional)",
+    "filter_by_category": "Categoría",
+    "filter_by_status": "Estado",
+    "filter_by_user": "Usuario Asignado",
+    "all_option": "Todas",
+    "step2_title": "2. Seleccionar Columnas",
+    "step3_title": "3. Previsualización del Reporte",
+    "print_button": "Imprimir",
+    "download_excel_button": "Descargar Excel",
+    "download_csv_button": "Descargar CSV",
+    "preview_button": "Previsualizar Reporte",
+    "generating_button": "Generando...",
+    "select_all": "Seleccionar Todo",
+    "deselect_all": "Deseleccionar Todo",
+    "filter_by_country": "País",
+    "notifications": {
+      "no_columns_selected": "Por favor, selecciona al menos una columna.",
+      "preview_error": "Error al generar la vista previa",
+      "download_success": "Reporte descargado con éxito",
+      "excel_download_success": "Reporte Excel descargado con éxito"
+    },
+    "columns": {
+      "ID_Equipo": "ID Equipo",
+      "Etiqueta_Inventario": "Etiqueta Inventario",
+      "Marca": "Marca",
+      "Modelo": "Modelo",
+      "Numero_de_Serie": "Numero de Serie",
+      "Categoria": "Categoria",
+      "Estado": "Estado",
+      "Usuario_Actual": "Usuario Actual",
+      "Fecha_de_Compra": "Fecha de Compra",
+      "Fecha_Fin_Garantia": "Fecha Fin Garantia",
+      "Pais": "País"
+    }
+  },
+  "asset_detail_page": {
+    "breadcrumb_assets": "Activos",
+    "breadcrumb_detail": "Detalle del Activo",
+    "title": "Activo: {{label}}",
+    "print_button": "Imprimir Etiqueta",
+    "details_section": {
+      "asset_id": "ID Equipo",
+      "category": "Categoría",
+      "status": "Estado",
+      "brand": "Marca",
+      "model": "Modelo",
+      "serial_number": "Número de Serie",
+      "current_location": "Ubicación Actual",
+      "not_registered": "No registrada",
+      "assigned_to": "Asignado a",
+      "unassigned": "Sin Asignar"
+    },
+    "movements_history_title": "Historial de Movimientos",
+    "movements_table_headers": {
+      "movement_id": "ID Movimiento",
+      "date": "Fecha",
+      "type": "Tipo",
+      "user": "Usuario",
+      "location": "Ubicación",
+      "observation": "Observación"
+    },
+    "not_found": "Activo no encontrado."
+  },
+    "related_assets_modal": {
+      "title": "Activos relacionados con {{name}}",
+      "no_related_assets": "No hay activos relacionados"
+    }
+}
+
+

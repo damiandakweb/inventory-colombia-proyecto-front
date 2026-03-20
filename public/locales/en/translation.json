@@ -1,0 +1,433 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "decommission": "Decommission",
+    "actions": "Actions",
+    "yes": "Yes",
+    "no": "No",
+    "search": "Search...",
+    "loading": "Loading...",
+    "no_options": "No options",
+    "related": "Related",
+    "status": "Status",
+    "category": "Category",
+    "user": "User",
+    "brand": "Brand",
+    "model": "Model",
+    "serial_number": "Serial Number",
+    "rows_per_page": "Rows per page",
+    "pagination_info": "{{from}}-{{to}} of {{count}}",
+    "rows_selected": "{{count}} row(s) selected",
+    "total_rows": "Total Rows:"
+  },
+  "languages": {
+    "es": "Spanish",
+    "en": "English",
+    "change_language": "Change Language"
+  },
+  "sidebar": {
+    "header": "Inventory Colombia",
+    "dashboard": "Dashboard",
+    "assets": "Assets",
+    "requests": "Requests",
+    "users": "Users",
+    "locations": "Locations",
+    "categories": "Categories",
+    "guest": "Guest",
+    "no_role": "No role",
+    "pending_requests_tooltip": "View Pending Requests",
+    "logout": "Logout"
+  },
+  "roles": {
+    "ADMINISTRADOR": "ADMINISTRATOR",
+    "ALMACENISTA": "WAREHOUSE MANAGER",
+    "USUARIO": "USER"
+  },
+  "login_page": {
+    "title": "Login",
+    "username_label": "Email",
+    "password_label": "Password",
+    "login_button": "Sign In",
+    "unicity_inventory": "Unicity Inventory"
+  },
+  "dashboard_page": {
+    "header": {
+      "title": "Dashboard",
+      "subtitle": "General summary of the inventory system"
+    },
+    "refresh_button": "Refresh",
+    "stats": {
+      "total_assets": "Total Assets",
+      "total_users": "Users",
+      "pending_requests": "Pending Requests",
+      "backup_computers": "Backup Computers"
+    },
+    "charts": {
+      "assets_by_status": "Asset Distribution by Status"
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "by_user": "By: {{user}}"
+    },
+    "data_keys": {
+      "en_uso": "In Use",
+      "en_bodega": "In Storage",
+      "dañado": "Damaged",
+      "en_mantenimiento": "Under Maintenance",
+      "devolución_a_bodega": "Return to Storage",
+      "devolución_por_dañofallo": "Return for Damage/Failure",
+      "cambio_por_daño": "Change for Damage",
+      "asignación_directa": "Direct Assignment",
+      "unknown": "Unknown"
+    }
+  },
+  "asset_page": {
+    "title": "Asset Management",
+    "add_button": "Add Asset",
+    "generate_report_button": "Generate Report",
+    "print_labels_button": "Print {{count}} Labels",
+    "print_labels_title": "Print Labels",
+    "search_placeholder": "Search by label, brand, model, serial...",
+    "active_filter": "Active filter: {{filter}}",
+
+    "all_countries": "All countries",
+    "all_brands": "All brands",
+    "all_categories": "All categories",
+    "all_states": "All states",
+    "all_users": "All users",
+    "clear_filters": "Clear filters",
+
+    "table_headers": {
+      "label": "Label",
+      "warranty": "Warranty",
+      "serial_number": "Serial Number"
+    },
+    "table_data": {
+      "no_label": "No label",
+      "unassigned": "Unassigned",
+      "linked_assets": "Linked Assets"
+    },
+    "warranty": {
+      "no_warranty": "No warranty",
+      "expired": "Expired",
+      "valid": "Valid",
+      "days_remaining": "{{days}} days remaining",
+      "expired_days_ago": "Expired {{days}} days ago",
+      "days_remaining_tooltip": "{{days}} days remaining"
+    },
+    "warranty_legend": {
+      "title": "Warranty Legend",
+      "valid": "Valid Warranty",
+      "expiring": "Expiring soon (≤30 days)",
+      "expired": "Expired Warranty",
+      "no_warranty": "No Warranty"
+    },
+    "tooltips": {
+      "edit_asset": "Edit Asset",
+      "register_movement": "Register Movement",
+      "deactivate_asset": "Decommission Asset",
+      "show_related": "View related assets"
+    },
+    "notifications": {
+      "load_error": "Error loading the asset list",
+      "load_related_error": "Error al cargar",
+      "asset_created_success": "Asset created successfully",
+      "asset_updated_success": "Asset updated successfully",
+      "asset_created_error": "Error creating the asset",
+      "asset_updated_error": "Error updating the asset",
+      "movement_success": "Movement registered successfully",
+      "movement_error": "Error registering the movement",
+      "asset_deleted_success": "Asset decommissioned successfully",
+      "asset_deleted_error": "Error decommissioning the asset"
+    },
+    "confirmations": {
+      "delete_asset": "Are you sure you want to decommission this asset?"
+    },
+    "modal": {
+      "create_title": "Create New Asset",
+      "edit_title": "Edit Asset",
+      "assigned_user": "Assigned User (search by name)",
+      "no_users_found": "No users found",
+      "inventory_label": "Inventory Label",
+      "required_field": "Field required",
+      "serial_number": "Serial Number",
+      "brand_placeholder": "Brand (e.g. Dell, HP)",
+      "model_placeholder": "Line / Model (e.g. Latitude)",
+      "date_section_title": "Date Information",
+      "purchase_date": "Purchase Date",
+      "purchase_date_required": "Purchase date is required.",
+      "purchased_on": "Purchased on",
+      "warranty_date": "Warranty Date",
+      "warranty_until": "Warranty until",
+      "related_assets_title": "Related Assets",
+      "no_linked_assets": "No linked assets.",
+      "search_to_link": "Search asset to link...",
+      "no_assets_to_link": "No assets available to link",
+      "link_asset_tooltip": "Link asset",
+      "already_linked": "This asset is already linked",
+      "link_success": "Asset linked successfully",
+      "link_error": "Error linking asset",
+      "unlink_success": "Asset unlinked successfully",
+      "unlink_error": "Error unlinking asset",
+      "basic_info_title": "Basic Asset Information",
+      "linked_assets_subtitle": "Related Assets",
+      "add_linked_asset_subtitle": "Link New Asset",
+      "common_link": "Link",
+      "country_label": "Country",
+      "select_country": "Select country"
+    }
+  },
+  "requests_page": {
+    "title": "Request Management",
+    "search_placeholder": "Search in requests...",
+    "active_filter": "Active filter: Pending Requests",
+    "table_headers": {
+      "ticket": "Ticket",
+      "date": "Date",
+      "type": "Type",
+      "user": "User",
+      "category": "Category",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "tooltips": {
+      "process": "Process Request",
+      "maintenance": "Send to Maintenance",
+      "return": "Process Return"
+    },
+    "notifications": {
+      "load_error": "Error loading requests",
+      "processed_success": "Request processed successfully",
+      "maintenance_success": "Asset sent to maintenance",
+      "return_success": "Return processed successfully",
+      "action_error": "Error processing action"
+    },
+    "statuses": {
+      "Nuevo": "New",
+      "Procesado": "Processed"
+    }
+  },
+  "users_page": {
+    "title": "User Management",
+    "add_button": "Add User",
+    "search_placeholder": "Search by name, email, or role...",
+    "table_headers": {
+      "id": "ID",
+      "full_name": "Full Name",
+      "email": "Email",
+      "role": "Role",
+      "actions": "Actions"
+    },
+    "tooltips": {
+      "edit_user": "Edit User",
+      "delete_user": "Delete User"
+    },
+    "notifications": {
+      "load_error": "Error loading user list",
+      "created_success": "User created successfully",
+      "updated_success": "User updated successfully",
+      "save_error": "Error creating or updating user",
+      "deleted_success": "User deleted successfully",
+      "delete_error": "Error deleting user"
+    },
+    "confirmations": {
+      "delete": "Are you sure you want to delete this user?"
+    }
+  },
+  "user_detail_page": {
+    "breadcrumb_users": "Users",
+    "assigned_assets_title": "Assigned Assets",
+    "details_section": {
+      "id": "ID",
+      "role": "Role",
+      "email": "Email"
+    },
+    "assets_table_headers": {
+      "asset_id": "Asset ID",
+      "label": "Label",
+      "category": "Category",
+      "status": "Status"
+    },
+    "not_found": "User not found or error loading."
+  },
+  "user_modal": {
+    "edit_title": "Edit User",
+    "create_title": "Create New User",
+    "full_name_label": "Full Name",
+    "email_label": "Email",
+    "password_label": "Password",
+    "role_label": "Role",
+    "validations": {
+      "name_required": "Name is required.",
+      "email_required": "Email is required.",
+      "email_invalid": "Email format is invalid.",
+      "password_required": "Password is required."
+    }
+  },
+  "categories_page": {
+    "title": "Category Management",
+    "add_button": "Create Category",
+    "table_headers": {
+      "id": "ID",
+      "category_name": "Category Name",
+      "actions": "Actions"
+    },
+    "notifications": {
+      "load_error": "Error loading categories",
+      "created_success": "Category created successfully",
+      "updated_success": "Category updated successfully",
+      "save_error": "Error saving the category",
+      "deleted_success": "Category deleted",
+      "delete_error": "Error deleting, it may be in use"
+    },
+    "confirmations": {
+      "delete": "Are you sure you want to delete this category?"
+    },
+    "modal": {
+      "edit_title": "Edit Category",
+      "create_title": "Create New Category",
+      "name_label": "Category Name",
+      "required_field": "This field is required"
+    }
+  },
+  "locations_page": {
+    "title": "Location Management",
+    "add_button": "Create Location",
+    "table_headers": {
+      "id": "ID",
+      "location_name": "Location Name"
+    },
+    "notifications": {
+      "load_error": "Error loading locations",
+      "created_success": "Location created successfully",
+      "updated_success": "Location updated successfully",
+      "save_error": "Error saving the location",
+      "deleted_success": "Location deleted",
+      "delete_error": "Error deleting, it may be in use"
+    },
+    "confirmations": {
+      "delete": "Are you sure you want to delete this location?"
+    },
+    "modal": {
+      "edit_title": "Edit Location",
+      "create_title": "Create New Location",
+      "name_label": "Location Name",
+      "required_field": "This field is required"
+    }
+  },
+  "movement_modal": {
+    "title": "Register Movement",
+    "asset_to_modify": "Asset to Modify",
+    "label_chip": "Label: {{label}}",
+    "movement_type_label": "Movement Type",
+    "assign_to_user_label": "Assign to User",
+    "new_location_label": "New Location",
+    "observation_label": "Observation",
+    "register_button": "Register Movement"
+  },
+  "movement_types": {
+    "ASIGNACION": "Assignment",
+    "TRASLADO": "Relocation",
+    "MANTENIMIENTO": "Maintenance",
+    "DEVOLUCION": "Return",
+    "BAJA": "Decommission"
+  },
+  "return_modal": {
+    "title": "Process Equipment Return",
+    "asset_to_return_label": "Asset to return",
+    "no_assets_error": "The user has no assets of this category.",
+    "observation_label": "Observation (Optional)",
+    "confirm_button": "Confirm Return"
+  },
+  "maintenance_modal": {
+    "title": "Send to Maintenance",
+    "asset_to_send_label": "Asset to send",
+    "confirm_button": "Confirm"
+  },
+  "print_qr_page": {
+    "no_assets_selected": "No assets selected to print."
+  },
+  "process_request_modal": {
+    "title": "Process Request #{{id}}",
+    "return_asset_label": "Select Asset to Return",
+    "user_has_no_asset_message": "The user does not have an asset of this category to return.",
+    "assign_asset_label": "Select Asset to Assign",
+    "replace_asset_label": "Select Replacement Asset",
+    "no_available_assets_error": "No available assets in this category.",
+    "destination_location_label": "Destination Location",
+    "observation_label": "Observation",
+    "complete_button": "Complete Process"
+  },
+  "report_modal": {
+    "title": "Asset Report Generator",
+    "step1_title": "1. Apply Filters (Optional)",
+    "filter_by_category": "Category",
+    "filter_by_status": "Status",
+    "filter_by_user": "Assigned User",
+    "all_option": "All",
+    "step2_title": "2. Select Columns",
+    "step3_title": "3. Report Preview",
+    "print_button": "Print",
+    "download_excel_button": "Download Excel",
+    "download_csv_button": "Download CSV",
+    "preview_button": "Preview Report",
+    "generating_button": "Generating...",
+    "select_all": "Select All",
+    "deselect_all": "Deselect All",
+    "filter_by_country": "Country",
+    "notifications": {
+      "no_columns_selected": "Please select at least one column.",
+      "preview_error": "Error generating preview",
+      "download_success": "Report downloaded successfully",
+      "excel_download_success": "Excel report downloaded successfully"
+    },
+    "columns": {
+      "ID_Equipo": "Team ID",
+      "Etiqueta_Inventario": "Inventory Tag",
+      "Marca": "Brand",
+      "Modelo": "Model",
+      "Numero_de_Serie": "Serial Number",
+      "Categoria": "Category",
+      "Estado": "Status",
+      "Usuario_Actual": "Current User",
+      "Fecha_de_Compra": "Purchase Date",
+      "Fecha_Fin_Garantia": "Warranty End Date",
+      "Pais": "Country"
+    }
+  },
+  "asset_detail_page": {
+    "breadcrumb_assets": "Assets",
+    "breadcrumb_detail": "Asset Detail",
+    "title": "Asset: {{label}}",
+    "print_button": "Print Label",
+    "details_section": {
+      "asset_id": "Asset ID",
+      "category": "Category",
+      "status": "Status",
+      "brand": "Brand",
+      "model": "Model",
+      "serial_number": "Serial Number",
+      "current_location": "Current Location",
+      "not_registered": "Not registered",
+      "assigned_to": "Assigned to",
+      "unassigned": "Unassigned"
+    },
+    "movements_history_title": "Movements History",
+    "movements_table_headers": {
+      "movement_id": "Movement ID",
+      "date": "Date",
+      "type": "Type",
+      "user": "User",
+      "location": "Location",
+      "observation": "Observation"
+    },
+    "not_found": "Asset not found."
+  },
+  "related_assets_modal": {
+    "title": "Assets related to {{name}}",
+    "no_related_assets": "No related assets found"
+  }
+}
