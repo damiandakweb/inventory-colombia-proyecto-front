@@ -41,3 +41,6 @@ export const procesarDevolucion = (solicitudId, data) => {
 export const getSolicitudesPendientesCount = () => {
     return apiClient.get('/solicitudes/pendientes/count');
 };
+export const rechazarSolicitud = (solicitudId, motivo = '') => {
+    return apiClient.post(`/solicitudes/${solicitudId}/rechazar?motivo=${encodeURIComponent(motivo)}`);
+};

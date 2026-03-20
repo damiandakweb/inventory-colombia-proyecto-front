@@ -196,18 +196,21 @@
     "tooltips": {
       "process": "Process Request",
       "maintenance": "Send to Maintenance",
-      "return": "Process Return"
+      "return": "Process Return",
+      "reject": "Reject request"
     },
     "notifications": {
       "load_error": "Error loading requests",
       "processed_success": "Request processed successfully",
       "maintenance_success": "Asset sent to maintenance",
       "return_success": "Return processed successfully",
-      "action_error": "Error processing action"
+      "action_error": "Error processing action",
+      "rejected_success": "Request rejected successfully"
     },
     "statuses": {
       "Nuevo": "New",
-      "Procesado": "Processed"
+      "Procesado": "Processed",
+      "Rechazado": "Rejected"
     }
   },
   "users_page": {

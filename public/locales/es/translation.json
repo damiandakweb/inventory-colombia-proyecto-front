@@ -196,18 +196,21 @@
     "tooltips": {
       "process": "Procesar Solicitud",
       "maintenance": "Enviar a Mantenimiento",
-      "return": "Procesar Devolución"
+      "return": "Procesar Devolución",
+      "reject": "Rechazar solicitud"
     },
     "notifications": {
       "load_error": "Error al cargar las solicitudes",
       "processed_success": "Solicitud procesada con éxito",
       "maintenance_success": "Activo enviado a mantenimiento",
       "return_success": "Devolución procesada con éxito",
-      "action_error": "Error al procesar la acción"
+      "action_error": "Error al procesar la acción",
+      "rejected_success": "Solicitud rechazada correctamente"
     },
     "statuses": {
       "Nuevo": "Nuevo",
-      "Procesado": "Procesado"
+      "Procesado": "Procesado",
+      "Rechazado": "Rechazado"
     }
   },
   "users_page": {

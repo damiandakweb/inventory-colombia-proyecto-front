@@ -12,11 +12,12 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import BuildIcon from '@mui/icons-material/Build';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SearchIcon from '@mui/icons-material/Search';
 import { useTranslation } from 'react-i18next';
-import { getAllSolicitudes, procesarSolicitud, enviarAMantenimiento, procesarDevolucion } from '../services/solicitudService';
+import { getAllSolicitudes, procesarSolicitud, enviarAMantenimiento, procesarDevolucion, rechazarSolicitud } from '../services/solicitudService';
 import ProcesarSolicitudModal from '../components/ProcesarSolicitudModal';
 import MantenimientoModal from '../components/MantenimientoModal';
 import DevolucionModal from '../components/DevolucionModal';
@@ -108,6 +109,17 @@ const SolicitudesPage = () => {
         setSolicitudParaDevolucion(null);
     };
 
+    const handleRechazarSolicitud = async (solicitud) => {
+        if (!window.confirm(`¿Rechazar la solicitud ${solicitud.ticketId}?`)) return;
+        try {
+            await rechazarSolicitud(solicitud.idSolicitud);
+            showNotification(t('requests_page.notifications.rejected_success'), 'success');
+            fetchSolicitudes();
+        } catch (error) {
+            showNotification(t('requests_page.notifications.action_error'), 'error');
+        }
+    };
+
     const handleConfirmAction = async (actionType, data) => {
         try {
             if (actionType === 'procesar') {
@@ -150,40 +162,57 @@ const SolicitudesPage = () => {
         {
             field: 'actions',
             headerName: t('requests_page.table_headers.actions'),
-            width: 120,
+            width: 160,
             sortable: false,
             renderCell: (params) => {
                 if (params.row.estadoSolicitud !== 'Nuevo') return null;
                 const tipo = params.row.tipoSolicitud.toUpperCase();
 
+                const botonRechazar = (
+                    <Tooltip title={t('requests_page.tooltips.reject')}>
+                        <IconButton color="error" onClick={() => handleRechazarSolicitud(params.row)}>
+                            <CancelIcon />
+                        </IconButton>
+                    </Tooltip>
+                );
+
                 if (tipo.includes('CAMBIO') || tipo.includes('NUEVO')) {
                     return (
-                        <Tooltip title={t('requests_page.tooltips.process')}>
-                            <IconButton color="success" onClick={() => handleOpenModal(params.row, 'procesar')}>
-                                <CheckCircleIcon />
-                            </IconButton>
-                        </Tooltip>
+                        <>
+                            <Tooltip title={t('requests_page.tooltips.process')}>
+                                <IconButton color="success" onClick={() => handleOpenModal(params.row, 'procesar')}>
+                                    <CheckCircleIcon />
+                                </IconButton>
+                            </Tooltip>
+                            {botonRechazar}
+                        </>
                     );
                 }
                 if (tipo.includes('MANTENIMIENTO')) {
                     return (
-                        <Tooltip title={t('requests_page.tooltips.maintenance')}>
-                            <IconButton sx={{ color: '#ed6c02' }} onClick={() => handleOpenModal(params.row, 'mantenimiento')}>
-                                <BuildIcon />
-                            </IconButton>
-                        </Tooltip>
+                        <>
+                            <Tooltip title={t('requests_page.tooltips.maintenance')}>
+                                <IconButton sx={{ color: '#ed6c02' }} onClick={() => handleOpenModal(params.row, 'mantenimiento')}>
+                                    <BuildIcon />
+                                </IconButton>
+                            </Tooltip>
+                            {botonRechazar}
+                        </>
                     );
                 }
                 if (tipo.includes('DEVOLUCIÓN') || tipo.includes('DEVOLUCION')) {
                     return (
-                        <Tooltip title={t('requests_page.tooltips.return')}>
-                            <IconButton color="info" onClick={() => handleOpenModal(params.row, 'devolucion')}>
-                                <KeyboardReturnIcon />
-                            </IconButton>
-                        </Tooltip>
+                        <>
+                            <Tooltip title={t('requests_page.tooltips.return')}>
+                                <IconButton color="info" onClick={() => handleOpenModal(params.row, 'devolucion')}>
+                                    <KeyboardReturnIcon />
+                                </IconButton>
+                            </Tooltip>
+                            {botonRechazar}
+                        </>
                     );
                 }
-                return null;
+                return botonRechazar;
             }
         },
     ];
