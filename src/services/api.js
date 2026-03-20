@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: 'http://10.13.20.16/api',
+    baseURL: 'http://localhost:8080/api',
 });
 
 // Interceptor de Petición: Añade el token a cada llamada

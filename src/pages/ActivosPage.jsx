@@ -381,7 +381,7 @@ const ActivosPage = () => {
             </Box>
 
             <Box sx={{ mb: 2 }}>
-                <TextField fullWidth variant="outlined" placeholder={t('asset_page.search_placeholder')} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} InputProps={{ startAdornment: (<InputAdornment position="start"><SearchIcon /></InputAdornment>), }} />
+                <TextField fullWidth variant="outlined" placeholder={t('asset_page.search_placeholder')} value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value); setPage(0); }} InputProps={{ startAdornment: (<InputAdornment position="start"><SearchIcon /></InputAdornment>), }} />
             </Box>
 
             {/* ✅ Filtros por columna */}
@@ -459,7 +459,7 @@ const ActivosPage = () => {
                         startIcon={<FilterAltOffIcon />}
                         onClick={handleClearFilters}
                     >
-                        Limpiar filtros
+                        {t('asset_page.clear_filters')}
                     </Button>
                 )}
             </Box>
@@ -505,7 +505,6 @@ const ActivosPage = () => {
                                 {filteredActivos.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, tableIndex) => {
                                     const isItemSelected = isSelected(row.idEquipo);
                                     const uniqueKey = `activo-${row.idEquipo}-${tableIndex}-${page}`;
-                                    const hasRelatedAssets = row.activosRelacionados && row.activosRelacionados.length > 0;
 
                                     return (
                                         <TableRow
