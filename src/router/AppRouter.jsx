@@ -7,7 +7,7 @@ import DashboardPage from '../pages/DashboardPage';
 import ActivosPage from '../pages/ActivosPage';
 import SolicitudesPage from '../pages/SolicitudesPage';
 import UsuariosPage from '../pages/UsuariosPage';
-import UsuarioDetailPage from '../pages/UsuarioDeatilPage.jsx'; // ✅ Asegúrate de importar la página de detalle
+import UsuarioDetailPage from '../pages/UsuarioDetailPage.jsx'; // ✅ Asegúrate de importar la página de detalle
 import UbicacionesPage from '../pages/UbicacionesPage';
 import CategoriasPage from '../pages/CategoriasPage';
 import ActivoDetailPage from '../pages/ActivoDetailPage';

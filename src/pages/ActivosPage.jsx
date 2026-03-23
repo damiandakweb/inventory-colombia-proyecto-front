@@ -80,13 +80,11 @@ const ActivosPage = () => {
 
     const procesarActivos = (rawData) => {
         if (!Array.isArray(rawData)) {
-            console.warn('Los datos de activos no son un array:', rawData);
             return [];
         }
 
         const validActivos = rawData.filter(activo => {
             if (!activo.idEquipo) {
-                console.warn('Activo sin idEquipo encontrado:', activo);
                 return false;
             }
             return true;
@@ -95,14 +93,11 @@ const ActivosPage = () => {
         const seen = new Set();
         const uniqueActivos = validActivos.filter(activo => {
             if (seen.has(activo.idEquipo)) {
-                console.warn('Activo duplicado encontrado:', activo);
                 return false;
             }
             seen.add(activo.idEquipo);
             return true;
         });
-
-        console.log(`Procesados ${uniqueActivos.length} activos únicos de ${rawData.length} elementos recibidos`);
         return uniqueActivos;
     };
 
@@ -112,7 +107,6 @@ const ActivosPage = () => {
             const response = await getAllActivos();
             setActivos(procesarActivos(response.data));
         } catch (error) {
-            console.error('Error al cargar activos:', error);
             showNotification(t('asset_page.notifications.load_error'), 'error');
         } finally {
             setLoading(false);
@@ -123,26 +117,11 @@ const ActivosPage = () => {
         fetchActivos();
     }, [t]);
 
-    // ✅ DEBUG: Verifica qué datos tienes
-    useEffect(() => {
-        if (activos.length > 0) {
-            console.log('=== ACTIVOS CARGADOS ===');
-            activos.forEach(activo => {
-                console.log(`${activo.etiquetaInventario}:`, {
-                    idEquipo: activo.idEquipo,
-                    activosRelacionados: activo.activosRelacionados,
-                    tieneRelacionados: activo.activosRelacionados?.length > 0
-                });
-            });
-        }
-    }, [activos]);
-
     useEffect(() => {
         const preFiltro = location.state?.preFiltro;
         if (preFiltro === 'backup') setActiveFilter('Computadores Backup');
     }, [location.state]);
 
-    // ✅ Obtener valores únicos para cada columna (para los selectores)
     const uniqueValues = useMemo(() => {
         return {
             paises: [...new Set(activos.map(a => a.pais).filter(Boolean))].sort(),
@@ -175,7 +154,6 @@ const ActivosPage = () => {
             const response = await getActivosRelacionados(activo.idEquipo);
             setRelatedAssetsList(response.data || []);
         } catch (error) {
-            console.error("Error fetching related assets:", error);
             showNotification(t('asset_page.notifications.load_related_error'), 'error');
         } finally {
             setLoadingRelated(false);
