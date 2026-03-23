@@ -21,7 +21,8 @@
     "rows_per_page": "Filas por página",
     "pagination_info": "{{from}}-{{to}} de {{count}}",
     "rows_selected": "{{count}} fila(s) seleccionada(s)",
-    "total_rows": "Filas totales:"
+    "total_rows": "Filas totales:",
+    "this_asset": "este activo"
   },
   "languages": {
     "es": "Español",

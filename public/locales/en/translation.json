@@ -21,7 +21,9 @@
     "rows_per_page": "Rows per page",
     "pagination_info": "{{from}}-{{to}} of {{count}}",
     "rows_selected": "{{count}} row(s) selected",
-    "total_rows": "Total Rows:"
+    "total_rows": "Total Rows:",
+    "this_asset": "this asset"
+
   },
   "languages": {
     "es": "Spanish",

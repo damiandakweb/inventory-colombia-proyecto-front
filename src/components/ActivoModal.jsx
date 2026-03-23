@@ -120,7 +120,6 @@ const ActivoModal = ({ open, onClose, onSave, activo }) => {
                 let initialSelectedUser = null;
 
                 if (activo && activo.idEquipo) { // Modo Edición
-                    console.log('Modo Edición - Preparando datos básicos para:', activo.etiquetaInventario);
                     initialFormState = {
                         numeroDeSerie: activo.numeroDeSerie || '',
                         etiquetaInventario: activo.etiquetaInventario || '',
@@ -138,7 +137,6 @@ const ActivoModal = ({ open, onClose, onSave, activo }) => {
                         initialSelectedUser = userRes.data?.find(u => u.idUsuario === activo.idUsuarioActual) || null;
                     }
                 } else { // Modo Creación
-                    console.log('Modo Creación');
                 }
 
                 // 3. Establecemos estado inicial del formulario y usuario
@@ -150,14 +148,11 @@ const ActivoModal = ({ open, onClose, onSave, activo }) => {
                 if (activo && activo.idEquipo) {
                     setLoadingRelated(true);
                     try {
-                        console.log(`Buscando relacionados para el activo ID: ${activo.idEquipo}`);
                         const relatedRes = await getActivosRelacionados(activo.idEquipo);
                         if (!isMounted) return;
-                        console.log('Relacionados recibidos:', relatedRes.data);
                         const uniqueRelated = eliminarDuplicados(relatedRes.data || [], 'idEquipo');
                         setFormData(prev => ({ ...prev, activosRelacionados: uniqueRelated }));
                     } catch (relatedError) {
-                        console.error("Error al cargar activos relacionados:", relatedError);
                         if (isMounted) showNotification(t('asset_page.notifications.load_related_error'), 'error');
                     } finally {
                         if (isMounted) setLoadingRelated(false);
@@ -165,7 +160,6 @@ const ActivoModal = ({ open, onClose, onSave, activo }) => {
                 }
 
             } catch (error) {
-                console.error("Error al cargar datos iniciales para el modal:", error);
                 if (isMounted) {
                     showNotification(t('notifications.error_loading_data'), 'error');
                     setLoadingInitialData(false);
@@ -229,7 +223,6 @@ const ActivoModal = ({ open, onClose, onSave, activo }) => {
             setActivoParaEnlazar(null); // Limpiamos el buscador
             showNotification(t('asset_page.modal.link_success'), 'success');
         } catch (error) {
-            console.error('Error al enlazar activo:', error);
             showNotification(t('asset_page.modal.link_error', { error: error.message || 'Error desconocido' }), 'error');
         } finally {
             setEnlazando(false);
@@ -252,7 +245,6 @@ const ActivoModal = ({ open, onClose, onSave, activo }) => {
             }));
             showNotification(t('asset_page.modal.unlink_success'), 'success');
         } catch (error) {
-            console.error('Error al desenlazar activo:', error);
             showNotification(t('asset_page.modal.unlink_error', { error: error.message || 'Error desconocido' }), 'error');
         }
     };
