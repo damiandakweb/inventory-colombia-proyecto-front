@@ -318,7 +318,8 @@ const ActivosPage = () => {
             await fetchActivos();
             showNotification(t('asset_page.notifications.movement_success'), 'success');
         } catch (error) {
-            showNotification(t('asset_page.notifications.movement_error'), 'error');
+            const msg = error.response?.data?.message || t('asset_page.notifications.movement_error');
+            showNotification(msg, 'error');
         } finally {
             handleCloseMovimientoModal();
         }
