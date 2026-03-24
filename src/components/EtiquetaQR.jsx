@@ -2,7 +2,8 @@ import React from 'react';
 import { Box, Typography, Paper, Divider } from '@mui/material';
 
 // URL base de tu API. Asegúrate de que coincida con la de tu archivo api.js
-const API_BASE_URL = 'http://10.58.66.76/api';//'http://10.58.66.76/api'; // O http://localhost:8080/api para pruebas locales
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+//'http://10.58.66.76/api'; // O http://localhost:8080/api para pruebas locales
 
 // Envuelve toda la definición del componente en React.forwardRef
 const EtiquetaQR = React.forwardRef(({ activo }, ref) => {

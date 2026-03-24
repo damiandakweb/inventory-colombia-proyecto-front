@@ -7,7 +7,6 @@ import {
     Dialog, DialogTitle, DialogContent, DialogActions
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import ReactDOMServer from 'react-dom/server';
 
 // Icons
 import AddIcon from '@mui/icons-material/Add';
@@ -33,7 +32,6 @@ import { createMovimiento } from '../services/movimientoService';
 import ActivoModal from '../components/ActivoModal';
 import MovimientoModal from '../components/MovimientoModal';
 import ReporteModal from '../components/ReporteModal';
-import PaginaImpresionQR from '../components/PaginaImpresionQR';
 import RelatedAssetsModal from '../components/RelatedAssetsModal';
 
 // Context
@@ -214,37 +212,108 @@ const ActivosPage = () => {
     );
 
     const handleBulkPrint = () => {
+        const apiUrl = import.meta.env.VITE_API_URL;
         const printWindow = window.open('', '_blank', 'height=800,width=600');
-        const printContent = ReactDOMServer.renderToStaticMarkup(
-            <PaginaImpresionQR activos={activosSeleccionados} />
-        );
-        printWindow.document.write('<html><head><title>Imprimir Etiquetas</title>');
+
+    const POR_FILA = 12;
+    const filasHTML = [];
+        for (let i = 0; i < activosSeleccionados.length; i += POR_FILA) {
+            const fila = activosSeleccionados.slice(i, i + POR_FILA);
+            filasHTML.push(`
+            <div class="fila">
+                ${fila.map(activo => `
+                    <div class="etiqueta">
+                        <img class="qr-img" src="${apiUrl}/qr/${activo.idEquipo}" alt="QR"/>
+                        <div class="label">${activo.etiquetaInventario || activo.idEquipo}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `);
+        }
+        const paginasHTML = `<div class="contenido">${filasHTML.join('')}</div>`;
+
         printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Imprimir Etiquetas</title>
             <style>
-                @page { size: A4; margin: 1cm; }
-                body { margin: 0; }
-                .print-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                    gap: 10px;
-                }
-                .print-item {
+                * { box-sizing: border-box; margin: 0; padding: 0; }
+                @page { size: letter; margin: 8mm; }
+                body { font-family: Arial, sans-serif; }
+                .contenido { width: 100%; }
+                .fila {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    gap: 1mm;
+                    margin-bottom: 1mm;
                     page-break-inside: avoid;
-                    border: 1px dashed #ccc;
+                    break-inside: avoid;
+                }
+                .etiqueta {
+                    width: 1.8cm;
+                    height: 2cm;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    border: 0.5px solid #000;
+                    padding: 1px;
+                    flex-shrink: 0;
+                }
+                .qr-img {
+                    width: 1.5cm;
+                    height: 1.5cm;
+                    object-fit: contain;
+                    display: block;
+                }
+                .label {
+                    font-size: 5px;
+                    text-align: center;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    width: 100%;
+                    margin-top: 1px;
                 }
             </style>
-        `);
-        printWindow.document.write('</head><body>');
-        printWindow.document.write(printContent);
-        printWindow.document.write('</body></html>');
-        printWindow.document.close();
-        printWindow.focus();
-        setTimeout(() => {
-            printWindow.print();
-            printWindow.close();
-        }, 500);
-    };
+        </head>
+        <body>
+            ${paginasHTML}
+            <script>
+                const imgs = document.querySelectorAll('.qr-img');
+                let loaded = 0;
+                let printed = false;
 
+                function tryPrint() {
+                    if (printed) return;
+                    printed = true;
+                    window.print();
+                    window.close();
+                }
+
+                if (imgs.length === 0) {
+                    tryPrint();
+                } else {
+                    imgs.forEach(img => {
+                        if (img.complete) {
+                            loaded++;
+                            if (loaded === imgs.length) tryPrint();
+                        } else {
+                            img.onload = img.onerror = () => {
+                                loaded++;
+                                if (loaded === imgs.length) tryPrint();
+                            };
+                        }
+                    });
+                }
+                setTimeout(tryPrint, 10000);
+            <\/script>
+        </body>
+        </html>
+    `);
+        printWindow.document.close();
+    };
     const obtenerPropsGarantia = (fechaGarantia) => {
         if (!fechaGarantia) return { label: t('asset_page.warranty.no_warranty'), color: 'default', icon: <SecurityIcon />, variant: 'outlined' };
         const diasRestantes = Math.ceil((new Date(fechaGarantia) - new Date()) / (1000 * 60 * 60 * 24));
