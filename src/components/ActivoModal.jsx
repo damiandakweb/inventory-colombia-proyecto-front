@@ -17,10 +17,9 @@ import { getAllUsers } from "../services/usuarioService.js";
 import { useNotification } from '../context/NotificationContext';
 import { useTranslation } from 'react-i18next';
 import { listaDePaises } from '../utils/paises';
-import i18n from "../i18n.js"; // Asegúrate que la ruta sea correcta
 
 const ActivoModal = ({ open, onClose, onSave, activo }) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { showNotification } = useNotification();
 
     // --- ESTADOS ---
@@ -363,7 +362,9 @@ const ActivoModal = ({ open, onClose, onSave, activo }) => {
                                         <Select labelId="categoria-label" name="idCategoria" value={formData.idCategoria || ''} label={t('common.category')} onChange={handleChange} >
                                             <MenuItem value="" disabled><em>Selecciona una categoría</em></MenuItem>
                                             {categorias.map((cat) => (
-                                                <MenuItem key={cat.idCategoria} value={cat.idCategoria}> {cat.nombreCategoria} </MenuItem>
+                                                <MenuItem key={cat.idCategoria} value={cat.idCategoria}>
+                                                    {i18n.language === 'en' && cat.nombreEn ? cat.nombreEn : cat.nombreCategoria}
+                                                </MenuItem>
                                             ))}
                                         </Select>
                                         {validation.isCategoriaInvalid && <FormHelperText>{t('asset_page.modal.required_field')}</FormHelperText>}
@@ -376,7 +377,9 @@ const ActivoModal = ({ open, onClose, onSave, activo }) => {
                                         <Select labelId="estado-label" name="idEstado" value={formData.idEstado || ''} label={t('common.status')} onChange={handleChange} >
                                             <MenuItem value="" disabled><em>Selecciona un estado</em></MenuItem>
                                             {estados.map((est) => (
-                                                <MenuItem key={est.idEstado} value={est.idEstado}> {est.nombreEstado} </MenuItem>
+                                                <MenuItem key={est.idEstado} value={est.idEstado}>
+                                                    {t(`asset_states.${est.nombreEstado?.toUpperCase().replace(/ /g, '_')}`, { defaultValue: est.nombreEstado })}
+                                                </MenuItem>
                                             ))}
                                         </Select>
                                         {validation.isEstadoInvalid && <FormHelperText>{t('asset_page.modal.required_field')}</FormHelperText>}

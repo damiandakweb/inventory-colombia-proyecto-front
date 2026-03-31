@@ -39,12 +39,18 @@ const UsuariosPage = () => {
     const filteredUsers = useMemo(() => {
         if (!searchTerm) return usuarios;
         const lowercasedFilter = searchTerm.toLowerCase();
-        return usuarios.filter(user =>
-            user.nombre.toLowerCase().includes(lowercasedFilter) ||
-            user.email.toLowerCase().includes(lowercasedFilter) ||
-            user.rol.toLowerCase().includes(lowercasedFilter)
-        );
-    }, [searchTerm, usuarios]);
+        return usuarios.filter(user => {
+            const matchRaw =
+                user.nombre.toLowerCase().includes(lowercasedFilter) ||
+                user.email.toLowerCase().includes(lowercasedFilter) ||
+                user.rol.toLowerCase().includes(lowercasedFilter);
+
+            const rolTraducido = t(`roles.${user.rol}`, { defaultValue: '' }).toLowerCase();
+            const matchTranslated = rolTraducido.includes(lowercasedFilter);
+
+            return matchRaw || matchTranslated;
+        });
+    }, [searchTerm, usuarios, t]);
 
     const handleOpenModal = (user = null) => {
         setCurrentUser(user);
@@ -99,7 +105,12 @@ const UsuariosPage = () => {
             )
         },
         { field: 'email', headerName: t('users_page.table_headers.email'), flex: 1 },
-        { field: 'rol', headerName: t('users_page.table_headers.role'), width: 150 },
+        {
+            field: 'rol',
+            headerName: t('users_page.table_headers.role'),
+            width: 150,
+            renderCell: (params) => t(`roles.${params.value}`, { defaultValue: params.value })
+        },
         {
             field: 'actions',
             headerName: t('users_page.table_headers.actions'),

@@ -10,7 +10,7 @@ import CategoriaModal from "../components/CategoriaModal.jsx";
 import { useTranslation } from 'react-i18next';
 
 const CategoriasPage = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [categorias, setcategorias] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentCategoria, setCurrentCategoria] = useState(null); // ✅ AÑADIDO: Estado para saber qué categoria editar
@@ -71,7 +71,14 @@ const CategoriasPage = () => {
 
     const columns = [
         { field: 'idCategoria', headerName: t('categories_page.table_headers.id'), width: 90 },
-        { field: 'nombreCategoria', headerName: t('categories_page.table_headers.category_name'), flex: 1 },
+        {
+            field: 'nombreCategoria',
+            headerName: t('categories_page.table_headers.category_name'),
+            flex: 1,
+            renderCell: (params) => i18n.language === 'en' && params.row.nombreEn
+                ? params.row.nombreEn
+                : params.row.nombreCategoria
+        },
         {
             field: 'actions', headerName: t('categories_page.table_headers.actions'), width: 120,
             renderCell: (params) => (

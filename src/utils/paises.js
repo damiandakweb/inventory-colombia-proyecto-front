@@ -7,4 +7,5 @@ export const listaDePaises = [
     { code: 'DO', name: 'República Dominicana' },
     { code: 'PR', name: 'Puerto Rico' },
     { code: 'AR', name: 'Argentina' },
+    { code: 'PH', name: 'Filipinas' },
 ];

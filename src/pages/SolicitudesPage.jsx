@@ -72,14 +72,25 @@ const SolicitudesPage = () => {
         }
         if (searchTerm) {
             const lowercasedFilter = searchTerm.toLowerCase();
-            items = items.filter(solicitud =>
-                Object.values(solicitud).some(value =>
-                    String(value).toLowerCase().includes(lowercasedFilter)
-                )
-            );
+            items = items.filter(solicitud => {
+                // Buscar en valores crudos
+                const matchRaw = Object.values(solicitud).some(value =>
+                    value && String(value).toLowerCase().includes(lowercasedFilter)
+                );
+
+                // Buscar en valores traducidos
+                const categoriaTraducida = t(`categories.${solicitud.nombreCategoria?.toUpperCase().replace(/ /g, '_')}`, { defaultValue: '' }).toLowerCase();
+                const tipoTraducido = t(`request_types.${solicitud.tipoSolicitud?.toUpperCase().replace(/ /g, '_')}`, { defaultValue: '' }).toLowerCase();
+
+                const matchTranslated =
+                    categoriaTraducida.includes(lowercasedFilter) ||
+                    tipoTraducido.includes(lowercasedFilter);
+
+                return matchRaw || matchTranslated;
+            });
         }
         return items;
-    }, [searchTerm, solicitudes, activeFilter]);
+    }, [searchTerm, solicitudes, activeFilter, t]);
 
     const handleClearFilters = () => {
         setActiveFilter(null);
@@ -144,9 +155,20 @@ const SolicitudesPage = () => {
     const columns = [
         { field: 'ticketId', headerName: t('requests_page.table_headers.ticket'), width: 160 },
         { field: 'fechaSolicitud', headerName: t('requests_page.table_headers.date'), width: 150 },
-        { field: 'tipoSolicitud', headerName: t('requests_page.table_headers.type'), width: 180 },
+        {
+            field: 'tipoSolicitud',
+            headerName: t('requests_page.table_headers.type'),
+            width: 180,
+            renderCell: (params) => t(`request_types.${params.value?.toUpperCase().replace(/ /g, '_')}`, { defaultValue: params.value })
+        },
         { field: 'nombreUsuario', headerName: t('requests_page.table_headers.user'), width: 200 },
-        { field: 'nombreCategoria', headerName: t('requests_page.table_headers.category'), flex: 1, minWidth: 150 },
+        {
+            field: 'nombreCategoria',
+            headerName: t('requests_page.table_headers.category'),
+            flex: 1,
+            minWidth: 150,
+            renderCell: (params) => t(`categories.${params.value?.toUpperCase().replace(/ /g, '_')}`, { defaultValue: params.value })
+        },
         {
             field: 'estadoSolicitud',
             headerName: t('requests_page.table_headers.status'),

@@ -38,7 +38,7 @@ import RelatedAssetsModal from '../components/RelatedAssetsModal';
 import { useNotification } from "../context/NotificationContext.jsx";
 
 const ActivosPage = () => {
-    const { t } = useTranslation();
+    const { t, i18n} = useTranslation();
     const { showNotification } = useNotification();
     const [activos, setActivos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -55,7 +55,8 @@ const ActivosPage = () => {
         marca: '',
         categoria: '',
         estado: '',
-        usuario: ''
+        usuario: '',
+        garantia: ''
     });
 
     // ✅ Estados para el modal de relacionados
@@ -192,19 +193,41 @@ const ActivosPage = () => {
         if (columnFilters.usuario) {
             items = items.filter(activo => activo.nombreUsuarioActual === columnFilters.usuario);
         }
+        if (columnFilters.garantia) {
+            const hoy = new Date();
+            items = items.filter(activo => {
+                if (!activo.fechaGarantia) return columnFilters.garantia === 'sin_garantia';
+                const dias = Math.ceil((new Date(activo.fechaGarantia) - hoy) / (1000 * 60 * 60 * 24));
+                if (columnFilters.garantia === 'vigente') return dias > 30;
+                if (columnFilters.garantia === 'por_vencer') return dias >= 0 && dias <= 30;
+                if (columnFilters.garantia === 'vencida') return dias < 0;
+                if (columnFilters.garantia === 'sin_garantia') return !activo.fechaGarantia;
+                return true;
+            });
+        }
 
         // Filtro global de búsqueda
         if (searchTerm) {
             const lowercasedFilter = searchTerm.toLowerCase();
-            items = items.filter(activo =>
-                Object.values(activo).some(value =>
+            items = items.filter(activo => {
+                // Buscar en valores crudos de la BD
+                const matchRaw = Object.values(activo).some(value =>
                     value && String(value).toLowerCase().includes(lowercasedFilter)
-                )
-            );
+                );
+
+                // Buscar en valores traducidos
+                const estadoTraducido = t(`asset_states.${activo.nombreEstado?.toUpperCase().replace(/ /g, '_')}`, { defaultValue: '' }).toLowerCase();
+                const categoriaTraducida = t(`categories.${activo.nombreCategoria?.toUpperCase().replace(/ /g, '_')}`, { defaultValue: '' }).toLowerCase();
+                const matchTranslated =
+                    estadoTraducido.includes(lowercasedFilter) ||
+                    categoriaTraducida.includes(lowercasedFilter);
+
+                return matchRaw || matchTranslated;
+            });
         }
 
         return items;
-    }, [searchTerm, activos, activeFilter, columnFilters]);
+    }, [searchTerm, activos, activeFilter, columnFilters, t]);
 
     const activosSeleccionados = useMemo(() =>
             activos.filter(activo => selected.includes(activo.idEquipo)),
@@ -308,7 +331,7 @@ const ActivosPage = () => {
                     });
                 }
                 setTimeout(tryPrint, 10000);
-            <\/script>
+            </script>
         </body>
         </html>
     `);
@@ -331,7 +354,8 @@ const ActivosPage = () => {
             marca: '',
             categoria: '',
             estado: '',
-            usuario: ''
+            usuario: '',
+            garantia: ''
         });
         navigate('/activos', { replace: true });
     };
@@ -489,7 +513,9 @@ const ActivosPage = () => {
                     >
                         <MenuItem value="">{t('asset_page.all_categories')}</MenuItem>
                         {uniqueValues.categorias.map(cat => (
-                            <MenuItem key={cat} value={cat}>{cat}</MenuItem>
+                            <MenuItem key={cat} value={cat}>
+                                {t(`categories.${cat.toUpperCase().replace(/ /g, '_')}`, { defaultValue: cat })}
+                            </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
@@ -502,7 +528,9 @@ const ActivosPage = () => {
                     >
                         <MenuItem value="">{t('asset_page.all_states')}</MenuItem>
                         {uniqueValues.estados.map(estado => (
-                            <MenuItem key={estado} value={estado}>{estado}</MenuItem>
+                            <MenuItem key={estado} value={estado}>
+                                {t(`asset_states.${estado.toUpperCase().replace(/ /g, '_')}`, { defaultValue: estado })}
+                            </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
@@ -517,6 +545,20 @@ const ActivosPage = () => {
                         {uniqueValues.usuarios.map(user => (
                             <MenuItem key={user} value={user}>{user}</MenuItem>
                         ))}
+                    </Select>
+                </FormControl>
+
+                <FormControl size="small" sx={{ minWidth: 160 }}>
+                    <Select
+                        value={columnFilters.garantia}
+                        onChange={(e) => handleColumnFilterChange('garantia', e.target.value)}
+                        displayEmpty
+                    >
+                        <MenuItem value="">{t('asset_page.warranty_legend.all_warranties')}</MenuItem>
+                        <MenuItem value="vigente">{t('asset_page.warranty_legend.valid')}</MenuItem>
+                        <MenuItem value="por_vencer">{t('asset_page.warranty_legend.expiring')}</MenuItem>
+                        <MenuItem value="vencida">{t('asset_page.warranty_legend.expired')}</MenuItem>
+                        <MenuItem value="sin_garantia">{t('asset_page.warranty_legend.no_warranty')}</MenuItem>
                     </Select>
                 </FormControl>
 
@@ -607,8 +649,14 @@ const ActivosPage = () => {
                                             <TableCell>{row.marca || '-'}</TableCell>
                                             <TableCell>{row.modelo || '-'}</TableCell>
                                             <TableCell>{row.numeroDeSerie || '-'}</TableCell>
-                                            <TableCell>{row.nombreCategoria || '-'}</TableCell>
-                                            <TableCell>{row.nombreEstado || '-'}</TableCell>
+                                            <TableCell>
+                                                {row.nombreCategoria
+                                                    ? (i18n.language === 'en' && row.nombreCategoriaEn
+                                                        ? row.nombreCategoriaEn
+                                                        : row.nombreCategoria)
+                                                    : '-'}
+                                            </TableCell>
+                                            <TableCell>{row.nombreEstado ? t(`asset_states.${row.nombreEstado.toUpperCase().replace(/ /g, '_')}`, { defaultValue: row.nombreEstado }) : '-'}</TableCell>
                                             <TableCell>{
                                                 (() => {
                                                     const props = obtenerPropsGarantia(row.fechaGarantia);

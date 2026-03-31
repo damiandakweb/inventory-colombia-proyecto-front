@@ -120,7 +120,16 @@ const DashboardPage = () => {
             </Box>
         );
     }
+    // 👇 AGREGA AQUÍ:
+    const traducirEstado = (nombre) => {
+        const clave = nombre?.toUpperCase().replace(/ /g, '_');
+        return t(`asset_states.${clave}`, { defaultValue: nombre });
+    };
 
+    const activosPorEstadoTraducidos = summaryData.activosPorEstado.map(item => ({
+        ...item,
+        name: traducirEstado(item.name)
+    }));
     return (
         <Box sx={{ p: 3, backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
             {/* Header */}
@@ -214,7 +223,7 @@ const DashboardPage = () => {
                         <ResponsiveContainer width="100%" height="85%">
                             <PieChart>
                                 <Pie
-                                    data={summaryData.activosPorEstado}
+                                    data={activosPorEstadoTraducidos}
                                     dataKey="value"
                                     nameKey="name"
                                     cx="50%"
@@ -304,7 +313,7 @@ const DashboardPage = () => {
                                         <ListItemText
                                             primary={
                                                 <Typography variant="body2" sx={{ fontWeight: 500, mb: 0.5 }}>
-                                                    {mov.tipoDeMovimiento}{' '}
+                                                    {t(`movement_types.${mov.tipoDeMovimiento.toUpperCase().replace(/ /g, '_')}`, { defaultValue: mov.tipoDeMovimiento })}{' '}
                                                     <Link
                                                         component={RouterLink}
                                                         // 👇 CORRECCIÓN: Usa el nombre de propiedad que viene de tu API
@@ -325,7 +334,7 @@ const DashboardPage = () => {
                                             }
                                             secondary={
                                                 <Chip
-                                                    label={`Por: ${mov.nombreUsuario}`}
+                                                    label={t('dashboard_page.activity.by_user', { user: mov.nombreUsuario })}
                                                     size="small"
                                                     variant="outlined"
                                                     sx={{

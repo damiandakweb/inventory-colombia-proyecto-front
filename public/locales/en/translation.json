@@ -121,6 +121,7 @@
       "days_remaining_tooltip": "{{days}} days remaining"
     },
     "warranty_legend": {
+      "all_warranties": "All warranties",
       "title": "Warranty Legend",
       "valid": "Valid Warranty",
       "expiring": "Expiring soon (≤30 days)",
@@ -325,7 +326,11 @@
       "edit_title": "Edit Location",
       "create_title": "Create New Location",
       "name_label": "Location Name",
-      "required_field": "This field is required"
+      "required_field": "This field is required",
+      "name_label_es": "Name in Spanish",
+      "name_label_en": "Name in English",
+      "name_en_helper": "If left empty, the Spanish name will be used"
+
     }
   },
   "movement_modal": {
@@ -340,10 +345,35 @@
   },
   "movement_types": {
     "ASIGNACION": "Assignment",
-    "DEVOLUCION DE EQUIPO": "Equipment return",
-    "TRASLADO": "Transfer",
+    "ASIGNACIÓN": "Assignment",
+    "ASIGNACIÓN_DIRECTA": "Direct Assignment",
+    "ASIGNACION_DIRECTA": "Direct Assignment",
+    "ASIGNACIÓN_INICIAL": "Initial Assignment",
+    "TRASLADO": "Relocation",
     "MANTENIMIENTO": "Maintenance",
-    "BAJA": "Decommission"
+    "DEVOLUCION": "Return",
+    "DEVOLUCIÓN_DE_EQUIPO": "Equipment Return",
+    "DEVOLUCIÓN_A_BODEGA": "Return to Storage",
+    "DEVOLUCIÓN_POR_REEMPLAZO": "Return for Replacement",
+    "DEVOLUCIÓN_AUTOMÁTICA": "Automatic Return",
+    "DEVOLUCIÓN_POR_DAÑO/FALLO": "Return for Damage/Failure",
+    "BAJA": "Decommission",
+    "BAJA_DE_ACTIVO": "Asset Decommission",
+    "INGRESO": "Entry",
+    "INGRESO_A_BODEGA": "Storage Entry",
+    "ENVÍO_A_MANTENIMIENTO": "Sent to Maintenance",
+    "SOLICITUD_DE_EQUIPO_NUEVO": "New Equipment Request"
+  },
+  "categories": {
+    "AURICULARES": "Headphones",
+    "BASES": "Docking Stations",
+    "CARGADOR": "Charger",
+    "COMPUTADOR_DE_ESCRITORIO": "Desktop Computer",
+    "MONITOR": "Monitor",
+    "MOUSE": "Mouse",
+    "PORTATIL": "Laptop",
+    "TECLADO": "Keyboard",
+    "ALL_IN_ONE": "All In One"
   },
   "return_modal": {
     "title": "Process Equipment Return",
@@ -439,5 +469,23 @@
   "related_assets_modal": {
     "title": "Assets related to {{name}}",
     "no_related_assets": "No related assets found"
+  },
+  "request_types": {
+    "CAMBIO_POR_DAÑO": "Damage Replacement",
+    "CAMBIO_POR_FALLO": "Failure Replacement",
+    "SOLICITUD_DE_EQUIPO_NUEVO": "New Equipment Request",
+    "MANTENIMIENTO": "Maintenance",
+    "DEVOLUCIÓN_DE_EQUIPO": "Equipment Return",
+    "DEVOLUCION_DE_EQUIPO": "Equipment Return"
+  },
+  "asset_states": {
+    "NUEVO": "New",
+    "EN_USO": "In Use",
+    "DAÑADO": "Damaged",
+    "MANTENIMIENTO": "Maintenance",
+    "RETIRADO": "Retired",
+    "EN_BODEGA": "In Storage",
+    "DAÑADO_EN_BODEGA": "Damaged in Storage",
+    "ENVIAR_A_MANTENIMIENTO": "Send to Maintenance"
   }
 }

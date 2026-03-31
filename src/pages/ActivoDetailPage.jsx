@@ -8,7 +8,7 @@ import { getActivoById } from '../services/activoService';
 import { getMovimientosByActivoId } from '../services/movimientoService';
 
 const ActivoDetailPage = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { id } = useParams();
     const [activo, setActivo] = useState(null);
     const [movimientos, setMovimientos] = useState([]);
@@ -91,7 +91,7 @@ const ActivoDetailPage = () => {
                     };
 
                     setTimeout(doPrint, 8000);
-                <\/script>
+                </script>
             </body>
             </html>
         `);
@@ -166,12 +166,12 @@ const ActivoDetailPage = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={6} sm={4}><Typography><strong>{t('asset_detail_page.details_section.asset_id')}:</strong> {activo.idEquipo}</Typography></Grid>
-                    <Grid item xs={6} sm={4}><Typography><strong>{t('asset_detail_page.details_section.category')}:</strong> {activo.nombreCategoria}</Typography></Grid>
+                    <Grid item xs={6} sm={4}><Typography><strong>{t('asset_detail_page.details_section.category')}:</strong> {i18n.language === 'en' && activo.nombreCategoriaEn ? activo.nombreCategoriaEn : activo.nombreCategoria}</Typography></Grid>
                     <Grid item xs={6} sm={4}><Typography><strong>{t('asset_detail_page.details_section.status')}:</strong> {activo.nombreEstado}</Typography></Grid>
                     <Grid item xs={6} sm={4}><Typography><strong>{t('asset_detail_page.details_section.brand')}:</strong> {activo.marca}</Typography></Grid>
                     <Grid item xs={6} sm={4}><Typography><strong>{t('asset_detail_page.details_section.model')}:</strong> {activo.modelo}</Typography></Grid>
                     <Grid item xs={6} sm={4}><Typography><strong>{t('asset_detail_page.details_section.serial_number')}:</strong> {activo.numeroDeSerie}</Typography></Grid>
-                    <Grid item xs={12} sm={6}><Typography><strong>{t('asset_detail_page.details_section.current_location')}:</strong> {activo.nombreUbicacionActual || t('asset_detail_page.details_section.not_registered')}</Typography></Grid>
+                    <Grid item xs={12} sm={6}><Typography><strong>{t('asset_detail_page.details_section.current_location')}:</strong> {i18n.language === 'en' && activo.nombreUbicacionEn ? activo.nombreUbicacionEn : activo.nombreUbicacionActual || t('asset_detail_page.details_section.not_registered')}</Typography></Grid>
                     <Grid item xs={12} sm={6}><Typography><strong>{t('asset_detail_page.details_section.assigned_to')}:</strong> {activo.nombreUsuarioActual || t('asset_detail_page.details_section.unassigned')}</Typography></Grid>
                 </Grid>
             </Paper>

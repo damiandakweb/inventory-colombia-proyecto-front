@@ -120,6 +120,7 @@
       "days_remaining_tooltip": "{{days}} días restantes"
     },
     "warranty_legend": {
+      "all_warranties": "Todas las garantías",
       "title": "Leyenda de garantías:",
       "valid": "Garantía vigente",
       "expiring": "Próxima a vencer (≤30 días)",
@@ -285,6 +286,7 @@
       "category_name": "Nombre de Categoría",
       "actions": "Acciones"
     },
+
     "notifications": {
       "load_error": "Error al cargar las categorías",
       "created_success": "Categoría creada exitosamente",
@@ -300,7 +302,10 @@
       "edit_title": "Editar Categoría",
       "create_title": "Crear Nueva Categoría",
       "name_label": "Nombre de la Categoría",
-      "required_field": "Este campo es obligatorio"
+      "required_field": "Este campo es obligatorio",
+      "name_label_es": "Nombre en Español",
+      "name_label_en": "Nombre en Inglés",
+      "name_en_helper": "Si se deja vacío se usará el nombre en español"
     }
   },
   "locations_page": {
@@ -325,7 +330,10 @@
       "edit_title": "Editar Ubicación",
       "create_title": "Crear Nueva Ubicación",
       "name_label": "Nombre de la Ubicación",
-      "required_field": "Este campo es obligatorio"
+      "required_field": "Este campo es obligatorio",
+      "name_label_es": "Nombre en Español",
+      "name_label_en": "Nombre en Inglés",
+      "name_en_helper": "Si se deja vacío se usará el nombre en español"
     }
   },
   "movement_modal": {
@@ -340,10 +348,35 @@
   },
   "movement_types": {
     "ASIGNACION": "Asignación",
-    "DEVOLUCION DE EQUIPO": "Devolución de equipo",
+    "ASIGNACIÓN": "Asignación",
+    "ASIGNACIÓN_DIRECTA": "Asignación Directa",
+    "ASIGNACION_DIRECTA": "Asignación Directa",
+    "ASIGNACIÓN_INICIAL": "Asignación Inicial",
     "TRASLADO": "Traslado",
     "MANTENIMIENTO": "Mantenimiento",
-    "BAJA": "Baja"
+    "DEVOLUCION": "Devolución",
+    "DEVOLUCIÓN_DE_EQUIPO": "Devolución de Equipo",
+    "DEVOLUCIÓN_A_BODEGA": "Devolución a Bodega",
+    "DEVOLUCIÓN_POR_REEMPLAZO": "Devolución por Reemplazo",
+    "DEVOLUCIÓN_AUTOMÁTICA": "Devolución Automática",
+    "DEVOLUCIÓN_POR_DAÑO/FALLO": "Devolución por Daño/Fallo",
+    "BAJA": "Baja",
+    "BAJA_DE_ACTIVO": "Baja de Activo",
+    "INGRESO": "Ingreso",
+    "INGRESO_A_BODEGA": "Ingreso a Bodega",
+    "ENVÍO_A_MANTENIMIENTO": "Envío a Mantenimiento",
+    "SOLICITUD_DE_EQUIPO_NUEVO": "Solicitud de Equipo Nuevo"
+  },
+  "categories": {
+    "AURICULARES": "Auriculares",
+    "BASES": "Bases",
+    "CARGADOR": "Cargador",
+    "COMPUTADOR_DE_ESCRITORIO": "Computador de escritorio",
+    "MONITOR": "Monitor",
+    "MOUSE": "Mouse",
+    "PORTATIL": "Portátil",
+    "TECLADO": "Teclado",
+    "ALL_IN_ONE": "All In One"
   },
   "return_modal": {
     "title": "Procesar Devolución de Equipo",
@@ -439,7 +472,25 @@
     "related_assets_modal": {
       "title": "Activos relacionados con {{name}}",
       "no_related_assets": "No hay activos relacionados"
-    }
+    },
+  "request_types": {
+    "CAMBIO_POR_DAÑO": "Cambio por Daño",
+    "CAMBIO_POR_FALLO": "Cambio por Fallo",
+    "SOLICITUD_DE_EQUIPO_NUEVO": "Solicitud de Equipo Nuevo",
+    "MANTENIMIENTO": "Mantenimiento",
+    "DEVOLUCIÓN_DE_EQUIPO": "Devolución de Equipo",
+    "DEVOLUCION_DE_EQUIPO": "Devolución de Equipo"
+  },
+  "asset_states": {
+    "NUEVO": "Nuevo",
+    "EN_USO": "En uso",
+    "DAÑADO": "Dañado",
+    "MANTENIMIENTO": "Mantenimiento",
+    "RETIRADO": "Retirado",
+    "EN_BODEGA": "En bodega",
+    "DAÑADO_EN_BODEGA": "Dañado en bodega",
+    "ENVIAR_A_MANTENIMIENTO": "Enviar a mantenimiento"
+  }
 }
 
 

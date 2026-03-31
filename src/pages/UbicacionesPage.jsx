@@ -10,7 +10,7 @@ import UbicacionModal from '../components/UbicacionModal';
 import { useTranslation } from 'react-i18next';
 
 const UbicacionesPage = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [ubicaciones, setUbicaciones] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentUbicacion, setCurrentUbicacion] = useState(null);
@@ -70,7 +70,14 @@ const UbicacionesPage = () => {
 
     const columns = [
         { field: 'idUbicacion', headerName: t('locations_page.table_headers.id'), width: 90 },
-        { field: 'nombreUbicacion', headerName: t('locations_page.table_headers.location_name'), flex: 1 },
+        {
+            field: 'nombreUbicacion',
+            headerName: t('locations_page.table_headers.location_name'),
+            flex: 1,
+            renderCell: (params) => i18n.language === 'en' && params.row.nombreEn
+                ? params.row.nombreEn
+                : params.row.nombreUbicacion
+        },
         {
             field: 'actions',
             headerName: t('common.actions'),
