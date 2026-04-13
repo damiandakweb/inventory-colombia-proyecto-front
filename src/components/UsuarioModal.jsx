@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Box } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Box, MenuItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const UsuarioModal = ({ open, onClose, onSave, user }) => {
@@ -29,9 +29,8 @@ const UsuarioModal = ({ open, onClose, onSave, user }) => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSave = () => {
-        onSave(formData, user ? user.idUsuario : null);
-    };
+    // Contraseña solo es requerida al crear un ALMACENISTA
+    const requierePassword = !isEditMode && formData.rol === 'ALMACENISTA';
 
     const getValidationErrors = () => {
         const errors = {};
@@ -43,7 +42,7 @@ const UsuarioModal = ({ open, onClose, onSave, user }) => {
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
             errors.email = t('user_modal.validations.email_invalid');
         }
-        if (!isEditMode && !formData.password.trim()) {
+        if (requierePassword && !formData.password.trim()) {
             errors.password = t('user_modal.validations.password_required');
         }
         return errors;
@@ -51,6 +50,9 @@ const UsuarioModal = ({ open, onClose, onSave, user }) => {
 
     const validationErrors = getValidationErrors();
     const isFormInvalid = Object.keys(validationErrors).length > 0;
+    const handleSave = () => {
+        onSave(formData, user ? user.idUsuario : null);
+    };
 
     return (
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -81,7 +83,24 @@ const UsuarioModal = ({ open, onClose, onSave, user }) => {
                         error={!!validationErrors.email}
                         helperText={validationErrors.email || ''}
                     />
-                    {!isEditMode && (
+
+                    {/* Selector de rol — ahora editable */}
+                    <TextField
+                        select
+                        label={t('user_modal.role_label')}
+                        name="rol"
+                        value={formData.rol}
+                        onChange={handleChange}
+                        fullWidth
+                        margin="normal"
+                        disabled={isEditMode}
+                    >
+                        <MenuItem value="USUARIO">USUARIO</MenuItem>
+                        <MenuItem value="ALMACENISTA">ALMACENISTA</MenuItem>
+                    </TextField>
+
+                    {/* Contraseña solo para ALMACENISTA nuevo */}
+                    {requierePassword && (
                         <TextField
                             label={t('user_modal.password_label')}
                             name="password"
@@ -95,14 +114,6 @@ const UsuarioModal = ({ open, onClose, onSave, user }) => {
                             helperText={validationErrors.password || ''}
                         />
                     )}
-                    <TextField
-                        label={t('user_modal.role_label')}
-                        name="rol"
-                        value={formData.rol}
-                        fullWidth
-                        margin="normal"
-                        disabled
-                    />
                 </Box>
             </DialogContent>
             <DialogActions>
