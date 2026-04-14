@@ -17,7 +17,7 @@ const ActivoDetailPage = () => {
     const handlePrint = () => {
         if (!activo) return;
         const printWindow = window.open('', '_blank');
-        const qrUrl = `${import.meta.env.VITE_API_URL}/qr/${activo.idEquipo}`;
+        const qrUrl = `${import.meta.env.VITE_API_URL}/api/qr/${activo.idEquipo}`;
 
         printWindow.document.write(`
             <!DOCTYPE html>

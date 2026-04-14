@@ -2,10 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Box, Typography, ButtonGroup } from '@mui/material';
 
-/**
- * Un componente reutilizable que muestra botones para cambiar entre
- * español e inglés.
- */
 const LanguageSwitcher = () => {
     const { t, i18n } = useTranslation();
 
@@ -14,22 +10,46 @@ const LanguageSwitcher = () => {
     };
 
     return (
-        <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 1 }}>
-            <Typography variant="caption" sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            p: { xs: 0, sm: 2 }
+        }}>
+            <Typography variant="caption" sx={{
+                display: { xs: 'none', md: 'block' },
+                color: { sm: 'inherit' }
+            }}>
                 {t('languages.change_language')}:
             </Typography>
-            <ButtonGroup variant="outlined" size="small" aria-label="Language selector">
+            <ButtonGroup variant="outlined" size="small">
                 <Button
                     onClick={() => changeLanguage('es')}
                     variant={i18n.language === 'es' ? 'contained' : 'outlined'}
+                    sx={{
+                        color: { xs: 'white', sm: 'inherit' },
+                        borderColor: { xs: 'rgba(255,255,255,0.5)', sm: 'inherit' },
+                        '&.MuiButton-contained': {
+                            bgcolor: { xs: 'rgba(255,255,255,0.2)', sm: 'primary.main' },
+                            color: 'white'
+                        }
+                    }}
                 >
-                    {t('languages.es')}
+                    ES
                 </Button>
                 <Button
                     onClick={() => changeLanguage('en')}
                     variant={i18n.language.startsWith('en') ? 'contained' : 'outlined'}
+                    sx={{
+                        color: { xs: 'white', sm: 'inherit' },
+                        borderColor: { xs: 'rgba(255,255,255,0.5)', sm: 'inherit' },
+                        '&.MuiButton-contained': {
+                            bgcolor: { xs: 'rgba(255,255,255,0.2)', sm: 'primary.main' },
+                            color: 'white'
+                        }
+                    }}
                 >
-                    {t('languages.en')}
+                    EN
                 </Button>
             </ButtonGroup>
         </Box>

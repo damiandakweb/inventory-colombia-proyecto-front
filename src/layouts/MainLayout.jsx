@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Box, IconButton, AppBar, Toolbar, CssBaseline, Typography } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import Sidebar from '../components/Sidebar'; // Asegúrate de que la ruta a tu Sidebar sea correcta
+import Sidebar from '../components/Sidebar';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
-const drawerWidth = 280; // El ancho de tu sidebar
+const drawerWidth = 280;
 
 const MainLayout = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -16,50 +17,54 @@ const MainLayout = () => {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            {/* Barra superior que solo aparece en móviles */}
             <AppBar
                 position="fixed"
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
-                    display: { sm: 'none' }, // Oculta en pantallas grandes (sm y superiores)
+                    display: { sm: 'none' },
                     bgcolor: '#1e293b'
                 }}
             >
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Inventario Colombia
-                    </Typography>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            onClick={handleDrawerToggle}
+                            sx={{ mr: 2 }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" noWrap component="div">
+                            Inventario Colombia
+                        </Typography>
+                    </Box>
+                    {/* ✅ Language switcher en el AppBar móvil */}
+                    <Box sx={{ '& .MuiBox-root': { p: 0 } }}>
+                        <LanguageSwitcher />
+                    </Box>
                 </Toolbar>
             </AppBar>
 
-            {/* El Sidebar ahora es un componente controlado */}
             <Sidebar
                 drawerWidth={drawerWidth}
                 mobileOpen={mobileOpen}
                 handleDrawerToggle={handleDrawerToggle}
             />
 
-            {/* Contenido Principal de cada página */}
             <Box
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    p: 3,
+                    p: { xs: 1.5, sm: 3 },
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    mt: { xs: '64px', sm: 0 } // Margen superior en móvil para que no quede debajo del AppBar
+                    mt: { xs: '64px', sm: 0 },
+                    overflowX: 'hidden' // ✅ Evita scroll horizontal
                 }}
             >
-                <Outlet /> {/* Aquí es donde React Router renderizará tus páginas */}
+                <Outlet />
             </Box>
         </Box>
     );

@@ -131,8 +131,8 @@ const DashboardPage = () => {
         name: traducirEstado(item.name)
     }));
     return (
-        <Box sx={{ p: 3, backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
-            {/* Header */}
+        <Box sx={{ p: { xs: 1.5, sm: 3 }, minHeight: '100vh' }}>
+        {/* Header */}
             <Paper
                 elevation={1}
                 sx={{
@@ -180,16 +180,16 @@ const DashboardPage = () => {
 
             {/* Stats Cards */}
             <Grid container spacing={3} sx={{ mb: 3 }}>
-                <Grid item xs={12} sm={6} md={3} component={RouterLink} to="/activos" sx={{ textDecoration: 'none' }}>
+                <Grid item xs={6} sm={6} md={3} component={RouterLink} to="/activos" sx={{ textDecoration: 'none' }}>
                     <StatCard icon={<ComputerIcon />} title={t('dashboard_page.stats.total_assets')} value={summaryData.totalActivos} color="#1976d2" bgColor="rgba(25, 118, 210, 0.1)" />
                 </Grid>
-                <Grid item xs={12} sm={6} md={3} component={RouterLink} to="/usuarios" sx={{ textDecoration: 'none' }}>
+                <Grid item xs={6} sm={6} md={3} component={RouterLink} to="/usuarios" sx={{ textDecoration: 'none' }}>
                     <StatCard icon={<PeopleIcon />} title={t('dashboard_page.stats.total_users')} value={summaryData.totalUsuarios} color="#2e7d32" bgColor="rgba(46, 125, 50, 0.1)" />
                 </Grid>
-                <Grid item xs={12} sm={6} md={3} component={RouterLink} to="/solicitudes" state={{ preFiltro: "pendientes" }} sx={{ textDecoration: 'none' }}>
+                <Grid item xs={6} sm={6} md={3} component={RouterLink} to="/solicitudes" state={{ preFiltro: "pendientes" }} sx={{ textDecoration: 'none' }}>
                     <StatCard icon={<ListAltIcon />} title={t('dashboard_page.stats.pending_requests')} value={summaryData.solicitudesPendientes} color="#ed6c02" bgColor="rgba(237, 108, 2, 0.1)" />
                 </Grid>
-                <Grid item xs={12} sm={6} md={3} component={RouterLink} to="/activos" state={{ preFiltro: "backup" }} sx={{ textDecoration: 'none' }}>
+                <Grid item xs={6} sm={6} md={3} component={RouterLink} to="/activos" state={{ preFiltro: "backup" }} sx={{ textDecoration: 'none' }}>
                     <StatCard icon={<StorageIcon />} title={t('dashboard_page.stats.backup_computers')} value={summaryData.computadoresBackup} color="#2e7d32" bgColor="rgba(46, 125, 50, 0.1)" />
                 </Grid>
             </Grid>
@@ -200,63 +200,68 @@ const DashboardPage = () => {
                     <Paper
                         elevation={2}
                         sx={{
-                            p: 3,
-                            height: 480,
+                            p: { xs: 2, sm: 3 },
+                            height: { xs: 'auto', lg: 480 },
                             borderRadius: '8px',
                             backgroundColor: 'white',
                             border: '1px solid #e0e0e0'
                         }}
                     >
-                        <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
+                        <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 2, flexWrap: 'wrap' }}>
                             <AssignmentIcon sx={{ color: '#1976d2' }} />
                             <Typography
                                 variant="h6"
                                 sx={{
                                     fontWeight: 600,
-                                    color: 'text.primary'
+                                    color: 'text.primary',
+                                    fontSize: { xs: '0.95rem', sm: '1.25rem' }
                                 }}
                             >
                                 {t('dashboard_page.charts.assets_by_status')}
                             </Typography>
                         </Stack>
-                        <Divider sx={{ mb: 3 }} />
-                        <ResponsiveContainer width="100%" height="85%">
-                            <PieChart>
-                                <Pie
-                                    data={activosPorEstadoTraducidos}
-                                    dataKey="value"
-                                    nameKey="name"
-                                    cx="50%"
-                                    cy="50%"
-                                    outerRadius={110}
-                                    innerRadius={0}
-                                    paddingAngle={2}
-                                    stroke="#fff"
-                                    strokeWidth={2}
-                                >
-                                    {summaryData.activosPorEstado.map((entry, index) => (
-                                        <Cell
-                                            key={`cell-${index}`}
-                                            fill={COLORS[index % COLORS.length]}
-                                        />
-                                    ))}
-                                </Pie>
-                                <ChartTooltip
-                                    contentStyle={{
-                                        backgroundColor: 'white',
-                                        border: '1px solid #e0e0e0',
-                                        borderRadius: '6px',
-                                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-                                    }}
-                                />
-                                <Legend
-                                    wrapperStyle={{
-                                        paddingTop: '20px',
-                                        fontSize: '14px'
-                                    }}
-                                />
-                            </PieChart>
-                        </ResponsiveContainer>
+                        <Divider sx={{ mb: { xs: 1, sm: 3 } }} />
+
+                        {/* Móvil: altura fija pequeña, Desktop: ocupa todo el Paper */}
+                        <Box sx={{ height: { xs: 320, lg: 340 } }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                    <Pie
+                                        data={activosPorEstadoTraducidos}
+                                        dataKey="value"
+                                        nameKey="name"
+                                        cx="50%"
+                                        cy="45%"
+                                        outerRadius="70%"
+                                        innerRadius={0}
+                                        paddingAngle={2}
+                                        stroke="#fff"
+                                        strokeWidth={2}
+                                    >
+                                        {summaryData.activosPorEstado.map((entry, index) => (
+                                            <Cell
+                                                key={`cell-${index}`}
+                                                fill={COLORS[index % COLORS.length]}
+                                            />
+                                        ))}
+                                    </Pie>
+                                    <ChartTooltip
+                                        contentStyle={{
+                                            backgroundColor: 'white',
+                                            border: '1px solid #e0e0e0',
+                                            borderRadius: '6px',
+                                            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                                        }}
+                                    />
+                                    <Legend
+                                        wrapperStyle={{
+                                            paddingTop: '8px',
+                                            fontSize: '12px'
+                                        }}
+                                    />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </Box>
                     </Paper>
                 </Grid>
 
@@ -264,11 +269,12 @@ const DashboardPage = () => {
                     <Paper
                         elevation={2}
                         sx={{
-                            p: 3,
-                            height: 480,
+                            p: { xs: 2, sm: 3 },
+                            height: { xs: 'auto', lg: 480 },
                             borderRadius: '8px',
                             backgroundColor: 'white',
-                            border: '1px solid #e0e0e0'
+                            border: '1px solid #e0e0e0',
+                            overflow: 'hidden'
                         }}
                     >
                         <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
@@ -278,14 +284,15 @@ const DashboardPage = () => {
                                 sx={{
                                     fontWeight: 600,
                                     color: 'text.primary'
+
                                 }}
                             >
                                 {t('dashboard_page.activity.title')}
                             </Typography>
                         </Stack>
                         <Divider sx={{ mb: 2 }} />
-                        <Box sx={{ height: '85%', overflow: 'auto' }}>
-                            <List sx={{ p: 0 }}>
+                        <Box sx={{ height: { xs: 'auto', lg: '85%' }, overflow: 'auto', maxHeight: { xs: 400, lg: 'none' } }}>
+                        <List sx={{ p: 0 }}>
                                 {summaryData.ultimosMovimientos.map((mov, index) => (
                                     <ListItem
                                         key={mov.idMovimiento}

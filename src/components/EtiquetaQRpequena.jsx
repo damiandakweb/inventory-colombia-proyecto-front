@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
+
 
 // Fallback SVG (pequeño) para cuando la imagen no cargue
 const FALLBACK_SVG = `data:image/svg+xml;utf8,${encodeURIComponent(
